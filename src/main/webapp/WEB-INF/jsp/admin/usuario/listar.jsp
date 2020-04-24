@@ -66,7 +66,7 @@
 			</c:if>
 		</div>
 		<div class="container mb-5">
-			<h4>listagem de Usuario</h4>
+			<h4>Listagem de Usuario</h4>
 			<hr>
 
 

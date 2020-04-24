@@ -68,7 +68,9 @@
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 					<h4 class=" bg-dark purple-gradient">
-						<span class="m-0 text-center text-white">Cadastro de Usuario</span>
+					<div class="center">
+						<span class="m-0 text-center text-white ">Cadastro de Usuario</span>
+						</div>
 					</h4>
 
 
