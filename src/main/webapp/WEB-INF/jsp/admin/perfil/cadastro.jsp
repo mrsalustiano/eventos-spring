@@ -8,8 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-<spring:url value="/admin/perfil/deleta/" var="deleta"></spring:url>
-<spring:url value="/admin/perfil/altera/" var="altera"></spring:url>
 <spring:url value="/admin/perfis/salva" var="salva"></spring:url>
 
 <link
@@ -56,12 +54,12 @@
 	<div class="container mt-5 ">
 		<br>
 		<div class="col-lg-9">
-			<c:if test="${not empty mensagemErro }">
+			<c:if test="${not empty erro }">
 				<div id="divMensagemErro" class="alert alert-danger" role="alert">
 					${erro }</div>
 			</c:if>
 
-			<c:if test="${not empty mensagemSucesso }">
+			<c:if test="${not empty sucesso }">
 				<div id="divMensagemSucesso" class="alert alert-success"
 					role="alert">${sucesso }</div>
 			</c:if>
@@ -71,8 +69,8 @@
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 					<h4 class=" bg-dark purple-gradient">
-						<p class="m-0 text-center text-white">Cadastro de Perfil do
-							Usuario</p>
+						<span class="m-0 text-center text-white">Cadastro de Perfil do
+							Usuario</span>
 					</h4>
 
 

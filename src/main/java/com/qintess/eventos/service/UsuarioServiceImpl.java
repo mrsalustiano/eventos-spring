@@ -48,16 +48,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findByNome(String nome) {
-	 
-		return dao.findByNome(nome);
+	public List<Usuario> findByLogin(String login) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Usuario> findByAtivo(Boolean ativo) {
-	 
-		return dao.findByAtivo(ativo);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
+
+	
 
 	
 	

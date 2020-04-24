@@ -16,7 +16,7 @@ public interface UsuarioDao {
 
     List<Usuario> findAll();
     
-    List<Usuario> findByNome(String nome);
+    List<Usuario> findByLogin(String login);
     
     List<Usuario> findByAtivo(Boolean ativo);
 }

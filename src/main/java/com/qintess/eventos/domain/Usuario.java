@@ -14,8 +14,8 @@ import javax.validation.constraints.Size;
 @Table(name = "USUARIO")
 public class Usuario extends AbstractEntity<Long> {
 
-	@NotBlank(message = "Informe um nome.")
-	@Size(min = 3, max = 60, message = "O nome do Perfil deve ter entre {min} e {max} caracteres.")
+	@NotBlank(message = "Informe um login.")
+	@Size(min = 3, max = 60, message = "O nome do usuario deve ter entre {min} e {max} caracteres.")
 	@Column(name = "login", nullable = false, unique = true, length = 60)
 	private String login;
 	
@@ -82,6 +82,13 @@ public class Usuario extends AbstractEntity<Long> {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Usuario [login=" + login + ", Senha=" + Senha + ", Ativo=" + Ativo + ", perfil=" + perfil + "]";
 	}
 
 		

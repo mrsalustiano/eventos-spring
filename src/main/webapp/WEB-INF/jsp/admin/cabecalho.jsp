@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <spring:url value="/admin/" var="home"></spring:url>
 	<header>
 		<div class="container mt-5">
@@ -38,7 +39,7 @@
 								aria-labelledby="navbarDropdownMenuLink">
 								 <a class="dropdown-item disabled" href="#">Espetáculo</a> <a
 									class="dropdown-item " href="/admin/perfis/listar">Perfil de Usuario</a> <a
-									class="dropdown-item disabled" href="#">Usuario</a> <a
+									class="dropdown-item " href="/admin/usuarios/listar">Usuario</a> <a
 									class="dropdown-item disabled" href="#">Casa de Show</a>
 							</div></li>
 						<!-- Dropdown -->
@@ -49,7 +50,7 @@
 								aria-labelledby="navbarDropdownMenuLink">
 								 <a	class="dropdown-item" href="/admin/espetaculo">Espetáculo</a> <a
 									class="dropdown-item" href="/admin/perfis/cadastrar">Perfil de Usuario</a> <a
-									class="dropdown-item" href="/admin/usuario">Usuario</a> <a
+									class="dropdown-item" href="/admin/usuarios/cadastrar">Usuario</a> <a
 									class="dropdown-item" href="/admin/casas">Casa de Show</a>
 							</div></li>
 					</ul>
@@ -60,7 +61,7 @@
 						</a></li>
 						<li class="nav-item "><a href="#" class="nav-link active">
 								<i class="fas fa-user"> <small>Usuário:
-										${usuario.nome}</small></i>
+										</small></i>
 						</a></li>
 					</ul>
 				</div>

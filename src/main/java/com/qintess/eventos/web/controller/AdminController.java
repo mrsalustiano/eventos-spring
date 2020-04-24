@@ -34,7 +34,7 @@ public class AdminController {
 	// Cadastro de Usuario
 	@RequestMapping("admin/usuario")
 	public String IndexPaginaCadastroUsuario() {
-		return "admin/cadastroUsuario";
+		return "admin/usuario/cadastro";
 	}
 
 	

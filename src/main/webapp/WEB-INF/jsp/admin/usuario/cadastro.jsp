@@ -8,8 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-
-
+<spring:url value="/admin/usuarios/salva" var="salva"></spring:url>
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
 	rel="stylesheet" />
@@ -49,23 +48,128 @@
 </head>
 </head>
 <body>
-<jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
+	<jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
 
-<div class="container-fluid mt-5 ">
-<br>
-<div class="container mb-6">
-<aside class="py-1 bg-dark purple-gradient"><p class="m-0 text-center text-white">Cadastro de Usuario</p></aside>
+	<div class="container mt-5 ">
+		<br>
+		<div class="col-lg-9">
+			<c:if test="${not empty erro }">
+				<div id="divMensagemErro" class="alert alert-danger" role="alert">
+					${erro }</div>
+			</c:if>
+
+			<c:if test="${not empty sucesso }">
+				<div id="divMensagemSucesso" class="alert alert-success"
+					role="alert">${sucesso }</div>
+			</c:if>
+		</div>
+
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<h4 class=" bg-dark purple-gradient">
+						<span class="m-0 text-center text-white">Cadastro de Usuario</span>
+					</h4>
 
 
-</div>
-</div>
-	 
+
+		<form:form action="${salva}" cssClass="needs-validation"
+						modelAttribute="usuario"  >
+			<form:hidden path="id" />
+			<div class="form-group">
+				<label for="nome">Login</label> <form:input type="text"
+					cssClass="form-control" id="login" path="login" placeholder="Digite o login" />
+			</div>
+
+			<div class="form-group">
+	           <label for="perfil">Perfil</label>
+	               <select id="perfil" class="form-control" name="perfil">
+	               <option value="">Selecione</option>
+	               <c:forEach var="perfis" items="${perfis}">	                   
+	                    <option value="${perfis.id}">${perfis.nome}</option>
+	                    </c:forEach>
+	                 </select>
+             </div>
+
+			<div class="form-group">
+				<label for="senha1">Digite a Senha</label> <form:input type="password" 
+					cssClass="form-control" path="senha" id="senha1" placeholder="Digite a Senha" />
+			</div>
+
+
+			<div class="form-group">
+				<label for="senha2">Repita a Senha</label> <input type="password"
+					onblur="validaSenha()" required class="form-control" id="senha2"
+					 placeholder="Repita a Senha">
+			</div>
+
+			<div class="form-group">
+				<div class="form-check">
+					<form:label path="ativo">Ativo</form:label>
+							<form:checkbox path="ativo" />
+				</div>
+			</div>
 
 
 
 
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form:form>
 
-<jsp:include page="${request.contextPath}/footer"></jsp:include>	
 
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<c:if test="${not empty perfis}"></c:if>
+							<table class="table table-striped">
+								<thead class="thead">
+									<tr>
+										<th scope="col">Codigo</th>
+										<th scope="col">Login</th>
+										<th scope="col">Perfil</th>
+										<th scope="col">Ativo</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="perfil" items="${perfis}">
+										<tr>
+											<td>${perfil.id}</td>
+											<td>${perfil.nome}</td>
+											<td>${perfil.descricao}</td>
+											<td><c:if test="${perfil.ativo == true }">
+													<input type="checkbox" checked="checked"
+														disabled="disabled">
+												</c:if> <c:if test="${perfil.ativo == false }">
+													<input type="checkbox" disabled="disabled">
+												</c:if></td>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<jsp:include page="${request.contextPath}/footer"></jsp:include>
+	<script type="text/javascript">
+	function validaSenha(){
+
+	    var senhaDigitada = document.getElementById('senha1').value;
+	    var senhaConfirmacao = document.getElementById('senha2').value;
+
+	    if (senhaDigitada  != senhaConfirmacao){
+	        alert("Senhas não confere\ Digite novamente");
+	        document.getElementById('senha1').value="";
+	        document.getElementById('senha2').value="";
+	        document.getElementById('senha1').focus();
+	        return false;
+	    }
+	}
+	
+	
+	</script>
 </body>
 </html>

@@ -85,7 +85,7 @@ public class PerfilController {
 			model.addAttribute("perfil", perfil);
 
 		} catch (Exception e) {
-			attr.addFlashAttribute("mensagemErro", "ERRO GRAVE: " + e.getMessage());
+			attr.addFlashAttribute("erro", "ERRO GRAVE: " + e.getMessage());
 
 		}
 		return "admin/perfil/cadastro";
