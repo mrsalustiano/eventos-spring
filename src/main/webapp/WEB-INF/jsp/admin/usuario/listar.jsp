@@ -8,7 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-
+<spring:url value="/admin/usuarios/deleta/" var="deleta"></spring:url>
+<spring:url value="/admin/usuarios/altera/" var="altera"></spring:url>
+<spring:url value="/admin/usuarios/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'

@@ -99,7 +99,7 @@
 
 			<div class="form-group">
 				<label for="senha2">Repita a Senha</label> <input type="password"
-					onblur="validaSenha()" required class="form-control" id="senha2"
+					onblur="validaSenha()"  class="form-control" id="senha2"
 					 placeholder="Repita a Senha">
 			</div>
 
@@ -119,7 +119,7 @@
 
 					<div class="row">
 						<div class="col-md-8 offset-md-2">
-							<c:if test="${not empty perfis}"></c:if>
+							<c:if test="${not empty usuarios}"></c:if>
 							<table class="table table-striped">
 								<thead class="thead">
 									<tr>
@@ -131,12 +131,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="perfil" items="${perfis}">
+									<c:forEach var="usuario" items="${usuarios}">
 										<tr>
-											<td>${perfil.id}</td>
-											<td>${perfil.nome}</td>
-											<td>${perfil.descricao}</td>
-											<td><c:if test="${perfil.ativo == true }">
+											<td>${usuario.id}</td>
+											<td>${usuario.login}</td>
+											<td>${usuario.perfil}</td>
+											<td><c:if test="${usuario.ativo == true }">
 													<input type="checkbox" checked="checked"
 														disabled="disabled">
 												</c:if> <c:if test="${perfil.ativo == false }">

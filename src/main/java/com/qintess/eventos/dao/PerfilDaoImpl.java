@@ -18,7 +18,7 @@ public class PerfilDaoImpl extends AbstractDao<Perfil, Long> implements PerfilDa
 	@Override
 	public List<Perfil> findByAtivo(Boolean ativo) {
 		
-		return createQuery("select p from Perfil p where p.nome = ?1 ) ", ativo);
+		return createQuery("select p from Perfil p where p.ativo = ?1 ) ", ativo);
 	}
 
 

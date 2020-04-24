@@ -14,13 +14,14 @@ public class UsuarioDaoImpl extends AbstractDao<Usuario, Long> implements Usuari
 	@Override
 	public List<Usuario> findByAtivo(Boolean ativo) {
  
-		return null;
+		return createQuery("select u from Usuario u where u.ativo = ?1 ) ", ativo);
 	}
 
 	@Override
 	public List<Usuario> findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return createQuery("select u from Usuario u where u.login = ?1 ) ", login);
+		
 	}
 
 }

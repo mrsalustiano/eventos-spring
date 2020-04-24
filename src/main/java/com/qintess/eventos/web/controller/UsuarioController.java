@@ -7,10 +7,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,32 +37,73 @@ public class UsuarioController {
 
 	
 	@GetMapping("/cadastrar")
-	public String cadastrar(Usuario usuario) {
+	public String cadastrar(Usuario usuario, ModelMap model) {
+		model.addAttribute("usuarios", usuarioService.findAll());
+		
 		return "admin/usuario/cadastro";
 	}
 	
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model	) {
-		model.addAttribute("perfis", perfilService.findAll());
+		model.addAttribute("usuarios", usuarioService.findAll());
+		
 		return "admin/usuario/listar";
 	}
 	
 
 	@Transactional
 	@RequestMapping("/salva")
-	public String salvar(@Valid @ModelAttribute Usuario usuario, BindingResult result, RedirectAttributes attr ) {
+	public String salvar(@ModelAttribute Usuario usuario, RedirectAttributes attr ) {
 		
-		System.out.println(usuario.toString());
-		
-		if (result.hasErrors()) {
-			return "admin/usuario/cadastro";
+		Long valor = usuario.getId();
+		if (valor == null) {
+			usuarioService.save(usuario);
+			attr.addFlashAttribute("success", "Usuario adicionado com sucesso");	
+		} else {
+			usuarioService.update(usuario);
+			attr.addFlashAttribute("success", "Usuario editado com sucesso");
 		}
 		
-		usuarioService.save(usuario);
-		attr.addFlashAttribute("success", "Usuario adicionado com sucesso");
+		
 		return "redirect:/admin/usuarios/cadastrar";
 	}
+	
+	
+	@PostMapping("/editar")
+	public String editar(@Valid Usuario usuario, BindingResult result) {
+	usuarioService.update(usuario);
+		
+		return "redirect:/admin/usuarios/cadastro";
+	}
+	
+	
+	@GetMapping("/deleta/{id}")
+	@Transactional
+	public String deleta(@PathVariable(name = "id") Long id, RedirectAttributes attr) {
+	
+		usuarioService.delete(id);
+		attr.addFlashAttribute("sucesso", "Registro removido");
+		return "redirect:/admin/usuarios/listar";
+		
+	}
+	
+	@GetMapping("/altera/{id}")
+	public String carregaAlterar(@PathVariable(name = "id") Long id, Model model, RedirectAttributes attr) {
+		try {
+
+			Usuario usuario = usuarioService.findById(id);
+			model.addAttribute("usuarios", usuarioService.findAll());
+			model.addAttribute("usuario", usuario);
+
+		} catch (Exception e) {
+			attr.addFlashAttribute("erro", "ERRO GRAVE: " + e.getMessage());
+
+		}
+		return "admin/usuario/cadastro";
+	
+	}
+	
 	
 	
 	
