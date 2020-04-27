@@ -8,9 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-<spring:url value="/admin/perfis/deleta/" var="deleta"></spring:url>
-<spring:url value="/admin/perfis/altera/" var="altera"></spring:url>
-<spring:url value="/admin/perfis/salva" var="salva"></spring:url>
+<spring:url value="/admin/espetaculos/deleta/" var="deleta"></spring:url>
+<spring:url value="/admin/espetaculos/altera/" var="altera"></spring:url>
+<spring:url value="/admin/espetaculos/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -52,7 +52,6 @@
 </head>
 <body>
 	<jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
-
 	<div class="container mt-5 ">
 		<br>
 		<div class="col-lg-9">
@@ -69,47 +68,51 @@
 		<div class="container mb-5">
 				<div class="panel-footer text-center bg-dark purple-gradient">
 					<span class="m-0 text-center text-white" style="font-size: 20px">Listagem
-						de Perfil</span>
+						de Espetáculo</span>
 				</div>
 			<hr>
 
 
-	
-			<c:if test="${not empty perfis}"></c:if>
-				<table class="table table-sm table-striped">
-					<thead class="thead">
+
+			<c:if test="${not empty espetaculos}"></c:if>
+			<table class="table table-sm table-striped">
+				<thead class="thead">
+					<tr>
+						<th scope="col">Codigo</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Data</th>
+						<th scope="col">Valor</th>
+						<th scope="col">Cidade</th>
+						<th scope="col">UF</th>
+						<th scope="col">Faixa Etaria</th>
+						<th scope="col">Casa de Show</th>
+						<th scope="col" colspan="2">Ações</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="espetaculo" items="${espetaculos}">
 						<tr>
-							<th scope="col">Codigo</th>
-							<th scope="col">Nome</th>
-							<th scope="col">Descrição</th>
-							<th scope="col">Ativo</th>
-							<th scope="col" colspan="2">Ações</th>
-							
+							<td>${espetaculo.id}</td>
+							<td>${espetaculo.nome}</td>
+							<td>${espetaculo.dataEspetaculo}</td>
+							<td>${espetaculo.valor}</td>
+							<td>${espetaculo.cidade}</td>
+							<td>${espetaculo.UF}</td>
+							<td>${espetaculo.faixaEtaria}</td>
+							<td>${espetaculo.casa.nome}</td>
+							<td><a href="${altera}${espetaculo.id}" class="btn btn-info">Alterar</a></td>
+							<td><a href="#" class="btn btn-danger"
+								data-href="${deleta}${espetaculo.id}" data-toggle="modal"
+								data-target="#confirm-delete">Apagar</a><br></td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="perfil" items="${perfis}">
-							<tr >
-								<td>${perfil.id}</td>
-								<td>${perfil.nome}</td>
-								<td>${perfil.descricao}</td>
-								<td>
-									<c:if test="${perfil.ativo == true }">
-								    	<input type="checkbox" checked="checked" disabled="disabled">
-									</c:if> 
-									<c:if test="${perfil.ativo == false }">
-									    <input type="checkbox"  disabled="disabled">
-									</c:if> 								
-								</td>
-								
-							<td><a href="${altera}${perfil.id}" class="btn btn-info">Alterar</a></td>
-							<td><a href="#" class="btn btn-danger" data-href="${deleta}${perfil.id}" data-toggle="modal"
-										data-target="#confirm-delete">Apagar</a><br></td>	  
-						</tr>
-						
-						</c:forEach>
-					</tbody>
-				</table>
+					</c:forEach>
+
+
+
+				
+				</tbody>
+			</table>
 
 		</div>
 	</div>
@@ -126,8 +129,8 @@
 				</div>
 
 				<div class="modal-body">
-					<p>Você está prestes a excluir o registro , esse
-						procedimento é irreversível!</p>
+					<p>Você está prestes a excluir o registro , esse procedimento é
+						irreversível!</p>
 					<p>Deseja prosseguir?</p>
 
 				</div>
@@ -139,7 +142,7 @@
 			</div>
 		</div>
 
-</div>
+	</div>
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -157,7 +160,10 @@
 					$(this).find('.btn-ok').attr('href',
 							$(e.relatedTarget).data('href'));
 
-					 $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+					$('.debug-url').html(
+							'Delete URL: <strong>'
+									+ $(this).find('.btn-ok').attr('href')
+									+ '</strong>');
 				});
 	</script>
 </body>

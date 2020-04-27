@@ -66,7 +66,10 @@
 			</c:if>
 		</div>
 		<div class="container mb-5">
-			<h4>Listagem de Usuario</h4>
+				<div class="panel-footer text-center bg-dark purple-gradient">
+					<span class="m-0 text-center text-white" style="font-size: 20px">Listagem
+						de Usuario</span>
+				</div>
 			<hr>
 
 

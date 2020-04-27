@@ -97,7 +97,7 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputAlvara">Email</label> <input type="text"
-									onblur="validaEmail(this.value)" class="form-control"
+									onblur="validaEmail(this.value)" class="form-control" placeholder="Digite o Email"
 									id="inputAlvara">
 							</div>
 						</div>
@@ -113,13 +113,13 @@
 							</div>
 
 							<div class="form-group col-md-4">
-								<label for="inputAlvara">Telefone</label> <input type="text"
+								<label for="inputAlvara">Telefone</label> <input type="text" placeholder="Digite o telefone"
 									onkeypress="$(this).mask('(00) 0000-0000')"
 									class="form-control" id="inputAlvara">
 							</div>
 
 							<div class="form-group col-md-4">
-								<label for="inputAlvara">Celular</label> <input type="text"
+								<label for="inputAlvara">Celular</label> <input type="text" placeholder="Digite o Celular"
 									onkeypress="$(this).mask('(00) 0000-00000')"
 									class="form-control" id="inputAlvara">
 							</div>
@@ -131,7 +131,7 @@
 							<div class="form-group col-md-2">
 								<label for="cep">CEP</label> <input type="text"
 									onblur="pesquisacep(this.value);"
-									onkeypress="$(this).mask('00000-000')" class="form-control"
+									onkeypress="$(this).mask('00000-000')" class="form-control" placeholder="Digite o CEP"
 									id="cep">
 							</div>
 							<div class="form-group col-md-8">
@@ -168,6 +168,17 @@
 									class="form-control" id="uf">
 							</div>
 
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="senha1">Digite a Senha</label>
+								<input type="password" Class="form-control" id="senha1" placeholder="Digite a Senha">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="senha2">Repita a Senha</label>
+								<input type="password" value="" class="form-control" id="senha2" placeholder="Repita a Senha">
+							</div>
 						</div>
 
 						<div class="form-group">

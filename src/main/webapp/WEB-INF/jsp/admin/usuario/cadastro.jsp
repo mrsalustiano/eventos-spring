@@ -67,76 +67,73 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
-					<h4 class=" bg-dark purple-gradient">
-							<span class="m-0 text-center text-white ">Cadastro de Usuario</span>
-					</h4>
+					<div class="panel-footer text-center bg-dark purple-gradient">
+						<span class="m-0 text-center text-white" style="font-size: 20px">
+							Cadastro de Usuário</span>
+					</div>
+
+					<form:form action="${salva}" cssClass="needs-validation"
+						modelAttribute="usuario">
+						<form:hidden path="id" />
+						<div class="form-group">
+							<label for="nome">Login</label>
+							<form:input type="text" cssClass="form-control" id="login"
+								path="login" placeholder="Digite o login" />
+						</div>
+
+						<div class="form-group">
+							<label for="perfil">Perfil</label> <select id="perfil"
+								class="form-control" name="perfil">
+								<option value="">Selecione</option>
+								<c:forEach var="perfis" items="${perfis}">
+									<c:choose>
+										<c:when test="${usuario.id ne null }">
+											<option selected value="${perfis.id}">${perfis.nome}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${perfis.id}">${perfis.nome}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="senha1">Digite a Senha</label>
+							<form:input type="password" cssClass="form-control" path="senha"
+								id="senha1" placeholder="Digite a Senha" />
+						</div>
 
 
+						<div class="form-group">
+							<label for="senha2">Repita a Senha</label>
 
-		<form:form action="${salva}" cssClass="needs-validation"
-						modelAttribute="usuario"  >
-			<form:hidden path="id" />
-			<div class="form-group">
-				<label for="nome">Login</label> <form:input type="text"
-					cssClass="form-control" id="login" path="login" placeholder="Digite o login" />
-			</div>
+							<c:choose>
+								<c:when test="${usuario.id ne null }">
+									<input type="password" onblur="validaSenha()"
+										value="${usuario.senha}" class="form-control" id="senha2"
+										placeholder="Repita a Senha">
+								</c:when>
+								<c:otherwise>
+									<input type="password" onblur="validaSenha()" value=""
+										class="form-control" id="senha2" placeholder="Repita a Senha">
+								</c:otherwise>
+							</c:choose>
+						</div>
 
-			<div class="form-group">
-	           <label for="perfil">Perfil</label>
-	               <select id="perfil" class="form-control" name="perfil">
-	               <option value="">Selecione</option>
-	               <c:forEach var="perfis" items="${perfis}">
-	           			<c:choose>
-	           			   	<c:when test="${usuario.id ne null }">
-	           					<option selected value="${perfis.id}">${perfis.nome}</option>
-	                     	</c:when>
-	           				<c:otherwise>
-	           					<option value="${perfis.id}">${perfis.nome}</option>
-	                       	</c:otherwise>
-	           			</c:choose>    	                   
-	                </c:forEach>
-	                 </select>
-             </div>
-
-			<div class="form-group">
-				<label for="senha1">Digite a Senha</label> <form:input type="password" 
-					cssClass="form-control" path="senha"  id="senha1" placeholder="Digite a Senha" />
-			</div>
-
-
-			<div class="form-group">
-				<label for="senha2">Repita a Senha</label> 
-				
-						<c:choose>
-	           			   	<c:when test="${usuario.id ne null }">
-	           					<input type="password" onblur="validaSenha()" value="${usuario.senha}" class="form-control" id="senha2" placeholder="Repita a Senha">				
-	                     	</c:when>
-	           				<c:otherwise>
-	           					<input type="password" onblur="validaSenha()" value="" class="form-control" id="senha2" placeholder="Repita a Senha">
-	                       	</c:otherwise>
-	           			</c:choose>    	                   
-	            
-				
-				
-				
-			</div>
-
-			<div class="form-group">
-				<div class="form-check">
-					<form:label path="ativo">Ativo</form:label>
-							<form:checkbox path="ativo" />
-				</div>
-			</div>
-
-
-
-
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form:form>
+						<div class="form-group">
+							<div class="form-check">
+								<form:label path="ativo">Ativo</form:label>
+								<form:checkbox path="ativo" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button class="btn btn-danger" type="reset">Cancelar</button>
+					</form:form>
 
 
 					<div class="row">
-						<div class="col-md-8 offset-md-2">
+						<div class="col-md-12">
 							<c:if test="${not empty usuarios}"></c:if>
 							<table class="table table-striped">
 								<thead class="thead">
@@ -173,21 +170,19 @@
 
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript">
-	function validaSenha(){
+		function validaSenha() {
 
-	    var senhaDigitada = document.getElementById('senha1').value;
-	    var senhaConfirmacao = document.getElementById('senha2').value;
+			var senhaDigitada = document.getElementById('senha1').value;
+			var senhaConfirmacao = document.getElementById('senha2').value;
 
-	    if (senhaDigitada  != senhaConfirmacao){
-	        alert("Senhas não confere\ Digite novamente");
-	        document.getElementById('senha1').value="";
-	        document.getElementById('senha2').value="";
-	        document.getElementById('senha1').focus();
-	        return false;
-	    }
-	}
-	
-	
+			if (senhaDigitada != senhaConfirmacao) {
+				alert("Senhas não confere\ Digite novamente");
+				document.getElementById('senha1').value = "";
+				document.getElementById('senha2').value = "";
+				document.getElementById('senha1').focus();
+				return false;
+			}
+		}
 	</script>
 </body>
 </html>

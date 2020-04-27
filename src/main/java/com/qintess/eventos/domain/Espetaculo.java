@@ -3,10 +3,8 @@ package com.qintess.eventos.domain;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
@@ -39,7 +37,7 @@ public class Espetaculo extends AbstractEntity<Long> {
 	@Column(columnDefinition="mediumblob")
 	private byte[] folder;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name = "casa_id")
 	public Casa casa;
 

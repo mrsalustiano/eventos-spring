@@ -38,7 +38,7 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manutenção</a>
 							<div class="dropdown-menu dropdown-primary"
 								aria-labelledby="navbarDropdownMenuLink">
-								 <a class="dropdown-item disabled" href="#">Espetáculo</a> <a
+								 <a class="dropdown-item " href="/admin/espetaculos/listar">Espetáculo</a> <a
 									class="dropdown-item " href="/admin/perfis/listar">Perfil de Usuario</a> <a
 									class="dropdown-item " href="/admin/usuarios/listar">Usuario</a> <a
 									class="dropdown-item " href="/admin/casas/listar">Casa de Show</a>

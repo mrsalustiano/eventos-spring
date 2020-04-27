@@ -23,7 +23,7 @@
 							<span class="sr-only">(current)</span>
 					</a></li>
 
-					<li class="nav-item active"><a class="nav-link" href="/eventos/">Eventos
+					<li class="nav-item active"><a class="nav-link" href="/espetaculos/">Espetaculos
 					</a></li>
 
 

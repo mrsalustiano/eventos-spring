@@ -68,10 +68,9 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
-					<h4 class=" bg-dark purple-gradient">
-						<span class="m-0 text-center text-white ">Cadastro de
-							Espetáculo</span>
-					</h4>
+					<div class="panel-footer text-center bg-dark purple-gradient">
+						<span class="m-0 text-center text-white" style="font-size:20px"> Cadastro de Espetáculo</span>
+					</div>
 
 					<form:form action="${salva}" method="POST"
 						modelAttribute="espetaculo" enctype="multipart/form-data"
@@ -194,6 +193,7 @@
 						</div>
 
 						<button type="submit" class="btn btn-primary">Salvar</button>
+						<button class="btn btn-danger" type="reset">Cancelar</button>
 					</form:form>
 
 					<div class="row">

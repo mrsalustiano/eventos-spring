@@ -49,14 +49,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.findByLogin(login);
 	}
 
 	@Override
 	public List<Usuario> findByAtivo(Boolean ativo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.findByAtivo(ativo);
 	}
 
 

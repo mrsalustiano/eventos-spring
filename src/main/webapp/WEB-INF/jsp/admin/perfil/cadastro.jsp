@@ -68,10 +68,9 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
-					<h4 class=" bg-dark purple-gradient">
-						<span class="m-0 text-center text-white">Cadastro de Perfil do
-							Usuario</span>
-					</h4>
+				<div class="panel-footer text-center bg-dark purple-gradient">
+						<span class="m-0 text-center text-white" style="font-size:20px"> Cadastro de Perfil de Usuário</span>
+					</div>
 
 
 
@@ -98,14 +97,14 @@
 						</div>
 
 						<div class="row">
-							<div class="col-md-8 offset-md-2">
+							<div class="col-md-8 ">
 								<button class="btn btn-primary" type="submit">Salvar</button>
 								<button class="btn btn-danger" type="reset">Cancelar</button>
 							</div>
 						</div>
 					</form:form>
 					<div class="row">
-						<div class="col-md-8 offset-md-2">
+						<div class="col-md-12">
 							<c:if test="${not empty perfis}"></c:if>
 							<table class="table table-striped">
 								<thead class="thead">
