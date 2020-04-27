@@ -8,9 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-<spring:url value="/admin/usuarios/deleta/" var="deleta"></spring:url>
-<spring:url value="/admin/usuarios/altera/" var="altera"></spring:url>
-<spring:url value="/admin/usuarios/salva" var="salva"></spring:url>
+<spring:url value="/admin/casas/deleta/" var="deleta"></spring:url>
+<spring:url value="/admin/casas/altera/" var="altera"></spring:url>
+<spring:url value="/admin/casas/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -66,40 +66,42 @@
 			</c:if>
 		</div>
 		<div class="container mb-5">
-			<h4>Listagem de Usuario</h4>
+			<h4>Listagem de Casas de Show </h4>
 			<hr>
 
 
 	
-			<c:if test="${not empty usuarios}"></c:if>
+			<c:if test="${not empty casa}"></c:if>
 				<table class="table table-sm table-striped">
 					<thead class="thead">
 						<tr>
 							<th scope="col">Codigo</th>
-							<th scope="col">Login</th>
-							<th scope="col">Perfil</th>
-							<th scope="col">Ativo</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Cidade</th>
+							<th scope="col">UF</th>
+							<th scope="col">Foto</th>
 							<th scope="col" colspan="2">Ações</th>
 							
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="usuario" items="${usuarios}">
+						<c:forEach var="casas" items="${casa}">
 							<tr >
-								<td>${usuario.id}</td>
-								<td>${usuario.login}</td>
-								<td>${usuario.perfil.nome}</td>
+								<td>${casas.id}</td>
+								<td>${casas.nome}</td>
+								<td>${casas.cidade}</td>
+								<td>${casas.UF}</td>
 								<td>
-									<c:if test="${usuario.ativo == true }">
+									<c:if test="${casas.imagemCasa  != null }">
 								    	<input type="checkbox" checked="checked" disabled="disabled">
 									</c:if> 
-									<c:if test="${usuario.ativo == false }">
+									<c:if test="${casas.imagemCasa  == null }">
 									    <input type="checkbox"  disabled="disabled">
 									</c:if> 								
 								</td>
 								
-							<td><a href="${altera}${usuario.id}" class="btn btn-info">Alterar</a></td>
-							<td><a href="#" class="btn btn-danger" data-href="${deleta}${usuario.id}" data-toggle="modal"
+							<td><a href="${altera}${casas.id}" class="btn btn-info">Alterar</a></td>
+							<td><a href="#" class="btn btn-danger" data-href="${deleta}${casas.id}" data-toggle="modal"
 										data-target="#confirm-delete">Apagar</a><br></td>	  
 						</tr>
 						

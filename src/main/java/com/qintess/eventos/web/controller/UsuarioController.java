@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.qintess.eventos.domain.Perfil;
@@ -54,25 +55,36 @@ public class UsuarioController {
 
 	@Transactional
 	@RequestMapping("/salva")
-	public String salvar(@ModelAttribute Usuario usuario, RedirectAttributes attr ) {
+	public String salvar(@ModelAttribute Usuario usuario, RedirectAttributes attr,
+			@RequestParam(required=false, value="cancela") String cancela	) {
+		
+		
+		
+		try {
+			
+			if(cancela != null) {
+				return "redirect:/admin/usuarios/listar";
+			}
 		
 		Long valor = usuario.getId();
 		if (valor == null) {
 			usuarioService.save(usuario);
-			attr.addFlashAttribute("success", "Usuario adicionado com sucesso");	
+			attr.addFlashAttribute("mensagemSucesso", "Usuario cadastrado com sucesso!");
 		} else {
 			usuarioService.update(usuario);
-			attr.addFlashAttribute("success", "Usuario editado com sucesso");
+			attr.addFlashAttribute("mensagemSucesso", "Usuario editado com sucesso!");
 		}
-		
+		} catch (Exception e) {
+			attr.addFlashAttribute("mensagemErro", "ERRO GRAVE: " + e.getMessage());
+		}
 		
 		return "redirect:/admin/usuarios/cadastrar";
 	}
 	
-	
+	@Transactional
 	@PostMapping("/editar")
 	public String editar(@Valid Usuario usuario, BindingResult result) {
-	usuarioService.update(usuario);
+		usuarioService.update(usuario);
 		
 		return "redirect:/admin/usuarios/cadastro";
 	}
@@ -88,6 +100,7 @@ public class UsuarioController {
 		
 	}
 	
+	@Transactional
 	@GetMapping("/altera/{id}")
 	public String carregaAlterar(@PathVariable(name = "id") Long id, Model model, RedirectAttributes attr) {
 		try {

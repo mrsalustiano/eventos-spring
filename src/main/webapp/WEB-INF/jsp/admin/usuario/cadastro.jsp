@@ -52,71 +52,103 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
-
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
 
 		<div class="container mb-5">
+			<c:if test="${not empty mensagemErro }">
+				<div id="divMensagemErro" class="alert alert-danger" role="alert">
+					${mensagemErro }</div>
+			</c:if>
+
+			<c:if test="${not empty mensagemSucesso }">
+				<div id="divMensagemSucesso" class="alert alert-success"
+					role="alert">${mensagemSucesso }</div>
+			</c:if>
+
+
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 					<h4 class=" bg-dark purple-gradient">
-					<div class="center">
-						<span class="m-0 text-center text-white ">Cadastro de Usuario</span>
-						</div>
+
+						<span class="m-0 text-center text-white ">Cadastro de
+							Usuario</span>
 					</h4>
+					<form:form action="${salva}" cssClass="needs-validation"
+						modelAttribute="usuario">
+						<form:hidden path="id" />
+						<form:hidden path="perfil.id" />
+						
+						<div class="form-group">
+							<label for="nome">Login</label>
+							<form:input type="text" cssClass="form-control" id="login"
+								path="login" placeholder="Digite o login" />
+						</div>
+
+						<div class="form-group">
+							<label for="perfil">Perfil</label> <select id="perfil"
+								class="form-control" name="perfil">
+								<option value="">Selecione</option>
+								
+								<c:forEach var="perfis" items="${perfis}">
+								
+									<c:if test="${usuario.id == null}">
+										<option value="${perfis.id}">${perfis.nome}</option>
+									</c:if>
+									
+									
+									<c:if test="${usuario.id ne null}">
+										<option selected value="${perfis.id}">${perfis.nome}</option>
+									</c:if>
+									
+							
+								</c:forEach>	
+								
+								
+								
+							</select>
+
+
+						</div>
+
+						<div class="form-group">
+							<label for="senha1">Digite a Senha</label>
+							<form:input type="password" cssClass="form-control" path="senha"
+								id="senha1" placeholder="Digite a Senha" />
+						</div>
+
+
+						<div class="form-group">
+							<c:if test="${usuario.id ne 0 }">
+								<label for="senha2">Repita a Senha</label>
+								<input type="password" value="${usuario.senha}"
+									class="form-control" id="senha2" placeholder="Repita a Senha">
+							</c:if>
+							<c:if test="${usuario.id == 0 }">
+
+								<label for="senha2">Repita a Senha</label>
+								<input type="password" value="" onblur="validaSenha()"
+									class="form-control" id="senha2" placeholder="Repita a Senha">
+							</c:if>
+						</div>
+
+						<div class="form-group">
+							<div class="form-check">
+								<form:label path="ativo">Ativo</form:label>
+								<form:checkbox path="ativo" />
+							</div>
+						</div>
 
 
 
-		<form:form action="${salva}" cssClass="needs-validation"
-						modelAttribute="usuario"  >
-			<form:hidden path="id" />
-			<div class="form-group">
-				<label for="nome">Login</label> <form:input type="text"
-					cssClass="form-control" id="login" path="login" placeholder="Digite o login" />
-			</div>
 
-			<div class="form-group">
-	           <label for="perfil">Perfil</label>
-	               <select id="perfil" class="form-control" name="perfil">
-	               <option value="">Selecione</option>
-	               <c:forEach var="perfis" items="${perfis}">	                   
-	                    <option value="${perfis.id}">${perfis.nome}</option>
-	                    </c:forEach>
-	                 </select>
-             </div>
-
-			<div class="form-group">
-				<label for="senha1">Digite a Senha</label> <form:input type="password" 
-					cssClass="form-control" path="senha" id="senha1" placeholder="Digite a Senha" />
-			</div>
-
-
-			<div class="form-group">
-				<label for="senha2">Repita a Senha</label> <input type="password"
-					onblur="validaSenha()"  class="form-control" id="senha2"
-					 placeholder="Repita a Senha">
-			</div>
-
-			<div class="form-group">
-				<div class="form-check">
-					<form:label path="ativo">Ativo</form:label>
-							<form:checkbox path="ativo" />
-				</div>
-			</div>
-
-
-
-
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form:form>
+						<input type="submit" class="btn btn-primary" name="salva"
+						value="${usuario.id == null ? 'Cadastrar' : 'Alterar'}" />
+						
+						<c:if test="${usuario.id ne null }">
+						<input type="reset" class="btn btn-warning" name="cancela"
+							value="Cancelar" />
+							
+					</c:if>
+					</form:form>
 
 
 					<div class="row">
@@ -137,7 +169,7 @@
 										<tr>
 											<td>${usuario.id}</td>
 											<td>${usuario.login}</td>
-											<td>${usuario.perfil}</td>
+											<td>${usuario.perfil.nome}</td>
 											<td><c:if test="${usuario.ativo == true }">
 													<input type="checkbox" checked="checked"
 														disabled="disabled">
@@ -157,21 +189,19 @@
 
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript">
-	function validaSenha(){
+		function validaSenha() {
 
-	    var senhaDigitada = document.getElementById('senha1').value;
-	    var senhaConfirmacao = document.getElementById('senha2').value;
+			var senhaDigitada = document.getElementById('senha1').value;
+			var senhaConfirmacao = document.getElementById('senha2').value;
 
-	    if (senhaDigitada  != senhaConfirmacao){
-	        alert("Senhas não confere\ Digite novamente");
-	        document.getElementById('senha1').value="";
-	        document.getElementById('senha2').value="";
-	        document.getElementById('senha1').focus();
-	        return false;
-	    }
-	}
-	
-	
+			if (senhaDigitada != senhaConfirmacao) {
+				alert("Senhas não confere\ Digite novamente");
+				document.getElementById('senha1').value = "";
+				document.getElementById('senha2').value = "";
+				document.getElementById('senha1').focus();
+				return false;
+			}
+		}
 	</script>
 </body>
 </html>

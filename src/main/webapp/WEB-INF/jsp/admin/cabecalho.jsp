@@ -22,7 +22,7 @@
 						<li class="nav-item active"><a class="nav-link" href="${home}">Home
 								<span class="sr-only">(current)</span>
 						</a></li>
-						<li class="nav-item dropdown"><a
+					<!-- 	<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pesquisas</a>
 							<div class="dropdown-menu dropdown-primary"
@@ -32,6 +32,7 @@
 									class="dropdown-item disabled" href="#">Usuario</a> <a
 									class="dropdown-item disabled" href="#">Casa de Show</a>
 							</div></li>
+							 -->
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manutenção</a>
@@ -40,7 +41,7 @@
 								 <a class="dropdown-item disabled" href="#">Espetáculo</a> <a
 									class="dropdown-item " href="/admin/perfis/listar">Perfil de Usuario</a> <a
 									class="dropdown-item " href="/admin/usuarios/listar">Usuario</a> <a
-									class="dropdown-item disabled" href="#">Casa de Show</a>
+									class="dropdown-item " href="/admin/casas/listar">Casa de Show</a>
 							</div></li>
 						<!-- Dropdown -->
 						<li class="nav-item dropdown"><a
@@ -48,10 +49,10 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
 							<div class="dropdown-menu dropdown-primary"
 								aria-labelledby="navbarDropdownMenuLink">
-								 <a	class="dropdown-item" href="/admin/espetaculo">Espetáculo</a> <a
+								 <a	class="dropdown-item" href="/admin/espetaculos/cadastrar">Espetáculo</a> <a
 									class="dropdown-item" href="/admin/perfis/cadastrar">Perfil de Usuario</a> <a
 									class="dropdown-item" href="/admin/usuarios/cadastrar">Usuario</a> <a
-									class="dropdown-item" href="/admin/casas">Casa de Show</a>
+									class="dropdown-item" href="/admin/casas/cadastrar">Casa de Show</a>
 							</div></li>
 					</ul>
 				

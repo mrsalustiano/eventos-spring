@@ -8,21 +8,26 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Casa_Show")
-public class CasaShow extends AbstractEntity<Long> {
+public class Casa extends AbstractEntity<Long> {
 	
 	private String nome;
 	
 	private String alvara;
 	
 	@Column(name= "vencto_alvara", nullable = true, columnDefinition = "DATE")
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	private LocalDate vencAlvara;
 	
 	private String avcb;
 	
 	@Column(name= "vencto_avcb", nullable = true, columnDefinition = "DATE")
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	private LocalDate vencAvcb;
 	
 	private int capacidade;
@@ -164,9 +169,28 @@ public class CasaShow extends AbstractEntity<Long> {
 		this.capacidade = capacidade;
 	}
 
-	public CasaShow() {
+	
+	public byte[] getImagemCasa() {
+		return imagemCasa;
+	}
+
+	public void setImagemCasa(byte[] imagemCasa) {
+		this.imagemCasa = imagemCasa;
+	}
+
+	public String getImagemEncoded() {
+		return imagemEncoded;
+	}
+
+	public void setImagemEncoded(String imagemEncoded) {
+		this.imagemEncoded = imagemEncoded;
+	}
+
+	public Casa() {
 	
 	}
+
+
 
 	
 	

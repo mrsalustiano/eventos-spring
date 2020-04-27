@@ -43,6 +43,7 @@ public class PerfilController {
 	}
 
 	@RequestMapping("/salva")
+	@Transactional
 	public String salva(@ModelAttribute Perfil perfil) {
 
 		Long valor = perfil.getId();
@@ -61,6 +62,7 @@ public class PerfilController {
 	}
 
 	@PostMapping("/editar")
+	@Transactional
 	public String editar(@Valid Perfil perfil, BindingResult result ) {
 		perfilService.update(perfil);
 		

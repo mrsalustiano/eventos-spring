@@ -64,6 +64,7 @@ public class Perfil extends AbstractEntity<Long> {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+
 	
 	
 	

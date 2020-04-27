@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
 	
-	
-	
-
-	
-
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	
@@ -22,5 +17,24 @@ public class IndexController {
 	public String IndexPagina() {
 		return "index";
 
+	}
+
+	@RequestMapping("/cliente")
+	public String clientePagina() {
+		return "cliente/cadastro";
+
+	}
+	
+	
+	
+	
+	@RequestMapping("cabecalhoPrincipal")
+	public String CabecalhoPrincipal() {
+		return "fragments/cabecalho";
+	}
+	
+	@RequestMapping("footerPrincipal")
+	public String FooterPrinicpal() {
+		return "fragments/footer";
 	}
 }

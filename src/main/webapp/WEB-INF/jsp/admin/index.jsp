@@ -51,10 +51,24 @@
 <body>
 <jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
 
-<div class="container-fluid mt-5 ">
-<br>
-Aqui vai o conteudo
+
+
+
+<div class="container">
+		<div class="row">
+    		<div class="col-md-3 col-md-offset-2">
+      
+    		</div>
+    		<div class="col-md-5">
+         <img alt="" src="/img/area_restrita.png">
+    		</div>
+		</div>
 </div>
+
+
+<br>
+
+
 	 
 
 <jsp:include page="${request.contextPath}/footer"></jsp:include>	
