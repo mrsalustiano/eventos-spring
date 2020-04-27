@@ -29,6 +29,13 @@ public class PerfilController {
 //	public void initBinder(WebDataBinder binder) {
 //		binder.addValidators(new PerfilValidator());
 //	}
+	
+	@GetMapping("")
+	public String cadastrarL(Perfil Perfil, ModelMap model) {
+		model.addAttribute("perfis", perfilService.findAll());
+		return "admin/perfil/cadastro";
+	}
+
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Perfil Perfil, ModelMap model) {

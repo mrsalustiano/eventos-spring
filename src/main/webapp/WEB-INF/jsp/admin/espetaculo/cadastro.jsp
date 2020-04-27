@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-
+<spring:url value="/admin/espetaculos/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -73,39 +73,48 @@
 							Espetáculo</span>
 					</h4>
 
-					<form>
+					<form:form action="${salva}" method="POST"
+						modelAttribute="espetaculo" enctype="multipart/form-data"
+						cssClass="mb-2">
+						<form:hidden path="id" />
+
 
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputNome">Nome</label> <input type="text"
-									class="form-control" id="inputNome" placeholder="Nome">
+								<label for="inputNome">Nome</label>
+								<form:input type="text" path="nome" class="form-control"
+									id="inputNome" placeholder="Nome" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputCapacidade">Capacidade</label> <input
-									type="number" class="form-control" id="inputCapacidade"
-									placeholder="Capacidade">
+								<label for="inputCapacidade">Capacidade</label>
+								<form:input type="number" class="form-control"
+									id="inputCapacidade" path="capacidade" placeholder="Capacidade" />
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-group col-md-10">
-								<label for="data">Data</label> <input type="date"
-									class="form-control" id="data">
+								<label for="data">Data</label>
+								<form:input type="date" path="dataEspetaculo"
+									class="form-control" id="data" />
 							</div>
 							<div class="form-group col-md-2">
-								<label for="inputAlvara">Destaque</label> <input type="text"
-									class="form-control" id="inputAlvara">
+								<label for="inputDestaque">Destaque</label>
+								<form:input type="number" max="1" path="destaque"
+									class="form-control" id="inputDestaque" />
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-group col-md-8">
-								<label for="inputAlvara">Faixa Etaria</label> <input type="text"
-									class="form-control" id="inputAlvara">
+								<label for="inputFaixa">Faixa Etaria</label>
+								<form:input type="text" path="faixaEtaria" class="form-control"
+									id="inputFaixa" />
 							</div>
 							<div class="form-group col-md-4">
-								<label for="inputAlvara">Valor</label> <input type="text"
-									class="form-control" id="inputAlvara">
+								<label for="inputValor">Valor</label>
+								<form:input type="text" path="valor" class="form-control"
+									id="inputValor" />
 							</div>
 						</div>
 
@@ -115,8 +124,9 @@
 									<span class="input-group-text ">Folder</span>
 								</div>
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="inputFoto">
-									<label class="custom-file-label mb-1" for="inputFoto">Escolha
+									<input type="file" class="custom-file-input"
+										value="${espetaculo.folder}" id="inputFoto"> <label
+										class="custom-file-label mb-1" for="inputFoto">Escolha
 										uma Foto</label>
 								</div>
 							</div>
@@ -124,75 +134,107 @@
 
 						<div class="form-row">
 							<div class="form-group col-md-8">
-								<label for="inputAlvara">Descricao</label>
-								<textarea id="descricao" rows="10" cols="86" maxlength="2000"></textarea>
+								<label for="inputDescricao">Descricao</label>
+								<form:textarea path="descricao" id="descricao" rows="10"
+									cols="86" maxlength="2000" />
 							</div>
 						</div>
 
+						<div class="form-group">
+							<label for="casasLista">Casas de Show </label> <select id="casa"
+								class="form-control" name="casa">
+								<option value="">Selecione</option>
+								<c:forEach var="casa" items="${casa}">
+									<option value="${casa.id}">${casa.nome}</option>
 
-						<div class="form-row">
-							<div class="form-group col-md-12">
-								<label for="perfil">Casa de Show</label> <select id="perfil"
-									class="form-control" name="perfil">
-									<option value="">Selecione</option>
-									<option value="1">Casa 1|Casa Na Casa 1</option>
-									<option value="2">Casa 2|Casa Na Casa 2</option>
-									<option value="3">Casa 3|Casa Na Casa 3</option>
-								</select>
-							</div>
+								</c:forEach>
+							</select>
 						</div>
-
-
 						<div class="form-row">
 							<div class="form-group col-md-2">
-								<label for="cep">CEP</label> <input type="text"
-									onblur="pesquisacep(this.value);" class="form-control" id="cep">
+								<label for="cep">CEP</label>
+								<form:input type="text" path="cep"
+									onblur="pesquisacep(this.value);" class="form-control" id="cep" />
 							</div>
 							<div class="form-group col-md-8">
-								<label for="logradouro">Logradouro</label> <input type="text"
-									class="form-control" id="logradouro">
+								<label for="logradouro">Logradouro</label>
+								<form:input type="text" path="logradouro" class="form-control"
+									id="logradouro" />
 							</div>
 							<div class="form-group col-md-2">
-								<label for="numero">Numero</label> <input type="text"
-									placeholder="Numero" class="form-control" id="numero">
+								<label for="numero">Numero</label>
+								<form:input type="text" path="numero" placeholder="Numero"
+									class="form-control" id="numero" />
 							</div>
-
 						</div>
-
-
-
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label for="bairro">Bairro</label> <input type="text"
-									class="form-control" id="bairro">
+								<label for="bairro">Bairro</label>
+								<form:input type="text" path="bairro" class="form-control"
+									id="bairro" />
 							</div>
 							<div class="form-group col-md-8">
-								<label for="complemento">Complemento</label> <input type="text"
-									class="form-control" id="complemento" placeholder="complemento">
+								<label for="complemento">Complemento</label>
+								<form:input type="text" path="complemento" class="form-control"
+									id="complemento" placeholder="complemento" />
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-group col-md-10">
-								<label for="cidade">Cidade</label> <input type="text"
-									class="form-control" id="cidade">
+								<label for="cidade">Cidade</label>
+								<form:input type="text" path="cidade" class="form-control"
+									id="cidade" />
 							</div>
 							<div class="form-group col-md-2">
-								<label for="uf">Estado</label> <input type="text"
-									class="form-control" id="uf">
+								<label for="uf">Estado</label>
+								<form:input type="text" path="UF" class="form-control" id="uf" />
 							</div>
 
 						</div>
-					
-						<button type="submit" class="btn btn-primary">Salvar</button>
-					</form>
 
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</form:form>
+
+					<div class="row">
+						<div class="col-md-12 ">
+							<c:if test="${not empty espetaculos}"></c:if>
+							<table class="table table-striped">
+								<thead class="thead">
+									<tr>
+										<th scope="col">Codigo</th>
+										<th scope="col">Nome</th>
+										<th scope="col">Data</th>
+										<th scope="col">Valor</th>
+										<th scope="col">Cidade</th>
+										<th scope="col">UF</th>
+										<th scope="col">Faixa Etaria</th>
+										<th scope="col">Casa de Show</th>
+									
+										
+
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="espetaculo" items="${espetaculos}">
+										<tr>
+											<td>${espetaculo.id}</td>
+											<td>${espetaculo.nome}</td>
+											<td>${espetaculo.dataEspetaculo}</td>
+											<td>${espetaculo.valor}</td>
+											<td>${espetaculo.cidade}</td>
+											<td>${espetaculo.UF}</td>
+											<td>${espetaculo.faixaEtaria}</td>
+											<td>${espetaculo.casa.nome}</td>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript" src="/js/buscaCep.js"></script>
 </body>

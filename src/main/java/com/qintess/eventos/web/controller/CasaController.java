@@ -28,6 +28,11 @@ public class CasaController {
 	@Autowired
 	private CasaService service;
 	
+	@GetMapping("")
+	public String cadastrarL(Casa casa, ModelMap model) {
+		model.addAttribute("casas", service.findAll());
+		return "admin/casas/cadastro";
+	}
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Casa casa, ModelMap model) {

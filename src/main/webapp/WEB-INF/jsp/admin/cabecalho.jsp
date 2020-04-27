@@ -49,10 +49,10 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
 							<div class="dropdown-menu dropdown-primary"
 								aria-labelledby="navbarDropdownMenuLink">
-								 <a	class="dropdown-item" href="/admin/espetaculos/cadastrar">Espetáculo</a> <a
-									class="dropdown-item" href="/admin/perfis/cadastrar">Perfil de Usuario</a> <a
-									class="dropdown-item" href="/admin/usuarios/cadastrar">Usuario</a> <a
-									class="dropdown-item" href="/admin/casas/cadastrar">Casa de Show</a>
+								 <a	class="dropdown-item" href="/admin/espetaculos">Espetáculo</a> <a
+									class="dropdown-item" href="/admin/perfis">Perfil de Usuario</a> <a
+									class="dropdown-item" href="/admin/usuarios">Usuario</a> <a
+									class="dropdown-item" href="/admin/casas">Casa de Show</a>
 							</div></li>
 					</ul>
 				

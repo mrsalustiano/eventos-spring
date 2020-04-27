@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @SuppressWarnings("serial")
 @Entity
@@ -22,8 +23,8 @@ public class Espetaculo extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 80)
 	private String faixaEtaria;
 	
-	@Column(nullable = false)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(nullable = false, columnDefinition = "DATE")
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	private LocalDate dataEspetaculo;
 	
 	@Column(nullable = false, scale = 2)
@@ -62,6 +63,12 @@ public class Espetaculo extends AbstractEntity<Long> {
 	
 	@Column(nullable = false, length = 2)
 	private String UF;
+	
+	@Column(nullable = true, length = 2000)
+	private String descricao;
+
+	@Column(nullable = false, length = 80)
+	private String nome;
 
 	public Espetaculo() {
 
@@ -177,6 +184,22 @@ public class Espetaculo extends AbstractEntity<Long> {
 
 	public void setUF(String uF) {
 		UF = uF;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	

@@ -34,7 +34,12 @@ public class UsuarioController {
 	@Autowired
 	private PerfilService perfilService;
 	
-
+	@GetMapping("")
+	public String cadastrarL(Usuario usuario, ModelMap model) {
+		model.addAttribute("usuarios", usuarioService.findAll());
+		
+		return "admin/usuario/cadastro";
+	}
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Usuario usuario, ModelMap model) {
