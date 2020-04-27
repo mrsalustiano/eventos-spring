@@ -48,7 +48,7 @@
 </style>
 
 <!-- Font Awesome -->
-
+</head>
 </head>
 <body>
 <jsp:include page="${request.contextPath}/cabecalho"></jsp:include>

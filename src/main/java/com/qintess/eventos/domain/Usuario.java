@@ -2,7 +2,6 @@ package com.qintess.eventos.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,7 +20,7 @@ public class Usuario extends AbstractEntity<Long> {
 	private String login;
 	
 	@NotBlank(message = "Informe uma senha.")
-	@Size(min = 3, max = 60, message = "A senha deve ter entre {min} e {max} caracteres.")
+	@Size(min = 8, max = 60, message = "A senha deve ter entre {min} e {max} caracteres.")
 	@Column(name = "senha", nullable = false, length = 60)
 	private String Senha;
 	
@@ -29,7 +28,7 @@ public class Usuario extends AbstractEntity<Long> {
 	
 	@NotNull(message = "Selecione o perfil relativo ao usuario.")
 	@ManyToOne
-	@JoinColumn(name = "id_perfil")
+	@JoinColumn(name = "id_perfil_fk")
 	private Perfil perfil;
 	
 	
