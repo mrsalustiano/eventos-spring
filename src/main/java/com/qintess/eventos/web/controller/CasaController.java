@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +52,7 @@ public class CasaController {
 	
 	@RequestMapping("/salva")
 	@Transactional
-	public String Salva(@ModelAttribute Casa casa,  
+	public String Salva(@ModelAttribute Casa casa,  BindingResult result,
 			@RequestParam(required=false, value="imagem") MultipartFile imagem,
 			RedirectAttributes attr ) {
 		
@@ -82,7 +83,7 @@ public class CasaController {
 
 	@Transactional
 	@PostMapping("/editar")
-	public String editar(@Valid Casa casa) {
+	public String editar(@Valid Casa casa,BindingResult result) {
 		service.update(casa);		
 		return "redirect:/admin/casas/cadastro";
 	}

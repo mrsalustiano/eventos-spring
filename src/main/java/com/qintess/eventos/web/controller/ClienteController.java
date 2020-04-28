@@ -18,75 +18,75 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.qintess.eventos.domain.Cliente;
 import com.qintess.eventos.service.ClienteService;
 
-
-
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
-	
+
 	@Autowired
 	private ClienteService service;
-	
-	
+
 	@GetMapping("")
 	public String cadastrarL(Cliente cliente, ModelMap model) {
 		model.addAttribute("clientes", service.findAll());
-		
+
 		return "cliente/cadastro";
 	}
-	
+
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cliente cliente, ModelMap model) {
 		model.addAttribute("clientes", service.findAll());
-		
+
 		return "cliente/cadastro";
 	}
-	
-	
+
 	@GetMapping("/listar")
-	public String listar(ModelMap model	) {
-		model.addAttribute("clientes", service.findAll());
+	public String listar(ModelMap model) {
 		
+	
+		
+		model.addAttribute("clientes", service.findAll());
+
 		return "cliente/listar";
 	}
-	
 
 	@Transactional
 	@RequestMapping("/salva")
-	public String salvar(@ModelAttribute Cliente cliente, RedirectAttributes attr ) {
-		
+	public String salvar(@ModelAttribute Cliente cliente, RedirectAttributes attr) {
+
 		Long valor = cliente.getId();
 		if (valor == null) {
 			service.save(cliente);
-			attr.addFlashAttribute("mensagemSucesso", "Cliente adicionado com sucesso");	
+			attr.addFlashAttribute("mensagemSucesso", "Cliente adicionado com sucesso");
 		} else {
 			service.update(cliente);
 			attr.addFlashAttribute("mensagemSucesso", "Cliente editado com sucesso");
 		}
-		
-		
+
 		return "redirect:/clientes/cadastrar";
 	}
-	
-	
+
 	@PostMapping("/editar")
 	public String editar(@Valid Cliente cliente, BindingResult result) {
-		service.update(cliente);
 		
+		if (result.hasErrors()) {
+			return "cliente/cadastro";
+		}
+		
+		service.update(cliente);
+
 		return "redirect:/clientes/cadastro";
 	}
-	
-	
+
 	@GetMapping("/deleta/{id}")
 	@Transactional
 	public String deleta(@PathVariable(name = "id") Long id, RedirectAttributes attr) {
-	
+
 		service.delete(id);
 		attr.addFlashAttribute("mensagemSucesso", "Cliente removido com sucesso");
 		return "redirect:/clientes/listar";
-		
+
 	}
-	
+
 	@GetMapping("/altera/{id}")
 	public String carregaAlterar(@PathVariable(name = "id") Long id, Model model, RedirectAttributes attr) {
 		try {
@@ -100,9 +100,7 @@ public class ClienteController {
 
 		}
 		return "cliente/cadastro";
-	
-	}
-	
 
+	}
 
 }

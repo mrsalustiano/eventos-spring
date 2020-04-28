@@ -55,7 +55,7 @@ public class VendasController {
 	
 	
 	@GetMapping("/listar")
-	public String listar(ModelMap model	) {
+	public String listar(ModelMap model	,BindingResult result) {
 		model.addAttribute("vendas", service.findAll());
 		
 		return "venda/compras";

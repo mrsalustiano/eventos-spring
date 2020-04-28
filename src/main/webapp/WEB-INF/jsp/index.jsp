@@ -70,6 +70,23 @@
 	src='<spring:url value="/js/mdb.min.js"  />'></script>
 
 <style>
+html,
+body,
+header,
+
+.rgba-gradient {
+  background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
+  background: -webkit-gradient(linear, 45deg, from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%)));
+  background: linear-gradient(to 45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
+}
+.md-form label {
+  color: #ffffff;
+}
+
+h6 {
+  line-height: 1.7;
+}
+
 .footer {
 	position: fixed;
 	bottom: 0px;
@@ -87,22 +104,14 @@
 	<jsp:include page="${request.contextPath}/cabecalhoPrincipal"></jsp:include>
 
 
-
+    <div class="view" style="background-image: url('/img/fundo.jpg');  background-size: cover; background-position: center center;">
 	<div class="mb-4"></div>
 	<div class="mb-4"></div>
-	<div class="container col-lg-8 mt-2">
+	<div class="container col-lg-8 mt-2" >
 
 		<div class="row">
 			<div class="col-lg-12 mt-3"></div>
 		</div>
-
-
-
-
-
-
-
-
 
 		<div class="row row-4">
 
@@ -149,7 +158,7 @@
 
 
 	</div>
-	
+
 	
 	
 
@@ -162,8 +171,7 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Descricao
-						do Evento</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle"><b >Descrição	do Evento</b></h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -178,6 +186,7 @@
 					</div>
 
 				</div>
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
@@ -186,7 +195,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
 	<script type="text/javascript">
     $(function () {

@@ -26,7 +26,7 @@
 					<li class="nav-item active"><a class="nav-link" href="/espetaculos/">Espetaculos</a></li>
 
 
-					<li class="nav-item active"><a class="nav-link" href="#">Agenda</a></li>
+					
 
 
 					<li class="nav-item active"><a class="nav-link" href="/clientes/">Clientes </a></li>

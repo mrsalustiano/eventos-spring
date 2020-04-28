@@ -82,9 +82,6 @@
 							<th scope="col">CPF</th>
 							<th scope="col">E-mail</th>
 							<th scope="col">Celular</th>
-							<th scope="col">Data Nasc.</th>
-							<th scope="col">Cidade</th>
-							<th scope="col">UF</th>
 							<th scope="col">NewsLetter</th>
 							<th scope="col" colspan="2">Ações</th>
 							
@@ -98,9 +95,7 @@
 								<td>${cliente.cpf}</td>
 								<td>${cliente.email}</td>
 								<td>${cliente.celular}</td>
-								<td>${cliente.dataNasc}</td>
-								<td>${cliente.cidade}</td>
-								<td>${cliente.UF}</td>
+							
 								<td>
 									<c:if test="${cliente.newsletter == true }">
 								    	<input type="checkbox" checked="checked" disabled="disabled">

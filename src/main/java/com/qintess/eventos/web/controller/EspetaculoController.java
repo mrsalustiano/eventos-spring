@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,7 +58,7 @@ public class EspetaculoController {
 	
 	@RequestMapping("/salva")
 	@Transactional
-	public String Salva(@ModelAttribute Espetaculo espetaculo,  
+	public String Salva(@ModelAttribute Espetaculo espetaculo, BindingResult result,
 			@RequestParam(required=false, value="imagem") MultipartFile imagem,
 			RedirectAttributes attr ) {
 		
@@ -87,7 +88,7 @@ public class EspetaculoController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Espetaculo espetaculo) {
+	public String editar(@Valid Espetaculo espetaculo,BindingResult result) {
 		 service.update(espetaculo);
 		 return "redirect:/admin/espetaculos/cadastro";
 	}
