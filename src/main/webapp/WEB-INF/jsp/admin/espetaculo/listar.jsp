@@ -74,7 +74,7 @@
 
 
 
-			<c:if test="${not empty espetaculos}"></c:if>
+			<c:if test="${not empty espetaculo}"></c:if>
 			<table class="table table-sm table-striped">
 				<thead class="thead">
 					<tr>
@@ -84,12 +84,13 @@
 						<th scope="col">Valor</th>
 						<th scope="col">Faixa Etaria</th>
 						<th scope="col">Casa de Show</th>
+						<th scope="col">Foto</th>
 						<th scope="col" colspan="2">Ações</th>
 
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="espetaculo" items="${espetaculos}">
+					<c:forEach var="espetaculo" items="${espetaculo}">
 						<tr>
 							<td>${espetaculo.id}</td>
 							<td>${espetaculo.nome}</td>
@@ -98,6 +99,14 @@
 							<td>${espetaculo.valor}</td>
 							<td>${espetaculo.faixaEtaria}</td>
 							<td>${espetaculo.casa.nome}</td>
+							<td><c:if test="${espetaculo.imagemCasa  != null }">
+										<input type="checkbox" checked="checked" disabled="disabled">
+									</c:if> <c:if test="${espetaculo.imagemCasa  == null }">
+										<input type="checkbox" disabled="disabled">
+									</c:if>
+							</td>
+							
+							
 							<td><a href="${altera}${espetaculo.id}" class="btn btn-info">Alterar</a></td>
 							<td><a href="#" class="btn btn-danger"
 								data-href="${deleta}${espetaculo.id}" data-toggle="modal"

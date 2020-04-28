@@ -40,12 +40,12 @@ public class IndexController {
 	private List<Espetaculo> encodaImagem(List<Espetaculo> espetaculos)  throws UnsupportedEncodingException{
 		
 		for (Espetaculo espetaculoL : espetaculos) {
-			if ( espetaculoL.getFolder() == null) {
+			if ( espetaculoL.getImagemCasa() == null) {
 				return espetaculos;
 			}
 			else {
 			
-				byte[]  encodeBase64 = Base64.getEncoder().encode(espetaculoL.getFolder());
+				byte[]  encodeBase64 = Base64.getEncoder().encode(espetaculoL.getImagemCasa());
 				espetaculoL.setImagemEncoded(new String(encodeBase64, "UTF-8"));
 			}
 		}

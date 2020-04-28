@@ -137,7 +137,7 @@
 							<small class="text-muted"><button
 									class="btn btn-primary btn-sm">Comprar</button></small> <small
 								class="text-muted">
-								<button class="btn btn-success btn-sm" data-toggle="modal"
+								<button class="btn btn-success btn-sm" data-toggle="modal" data-id="${espetaculo.descricao}"
 									data-target="#exampleModalCenter">Detalhes</button>
 							</small>
 						</div>
@@ -166,7 +166,7 @@
 					<div class="container mb-6">
 						<p>Dados como local e demais informacoes vindas do</p>
 						<p>Banco de dados do campo descricao</p>
-						<textarea rows="10" cols="45"> dsdsdssdsdsdsdsdsdsaddasdas</textarea>
+						<div class="col-6">${espetaculo.descricao}</div> 
 
 					</div>
 

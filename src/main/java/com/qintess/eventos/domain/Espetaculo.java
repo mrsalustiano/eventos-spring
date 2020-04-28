@@ -38,9 +38,9 @@ public class Espetaculo extends AbstractEntity<Long> {
 	private int destaque;
 
 	@Lob
-	@Column(columnDefinition = "mediumblob")
-	private byte[] folder;
-
+	@Column(columnDefinition="mediumblob")
+	private byte[] imagemCasa;
+	
 	@Transient //esse campo não será persistido no hibernate
 	private String imagemEncoded;
 	
@@ -110,12 +110,14 @@ public class Espetaculo extends AbstractEntity<Long> {
 		this.destaque = destaque;
 	}
 
-	public byte[] getFolder() {
-		return folder;
+	
+
+	public byte[] getImagemCasa() {
+		return imagemCasa;
 	}
 
-	public void setFolder(byte[] folder) {
-		this.folder = folder;
+	public void setImagemCasa(byte[] imagemCasa) {
+		this.imagemCasa = imagemCasa;
 	}
 
 	public Casa getCasa() {

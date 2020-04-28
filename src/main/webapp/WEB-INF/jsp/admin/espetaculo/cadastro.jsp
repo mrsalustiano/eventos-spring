@@ -68,6 +68,8 @@
 						cssClass="mb-2">
 
 						<form:hidden path="id" />
+						<form:hidden path="imagemCasa" />
+
 						<div class="col-9">
 							<c:if test="${not empty mensagemErro }">
 								<div id="divMensagemErro" class="alert alert-danger"
@@ -119,19 +121,40 @@
 							</div>
 						</div>
 
-						<div class="form-row">
-							<div class="input-group col-md-12 mb-2">
-								<div class="input-group-prepend">
-									<span class="input-group-text ">Folder</span>
-								</div>
-								<div class="custom-file">
-									<input type="file" class="custom-file-input"
-										value="${espetaculo.folder}" id="inputFoto"> <label
-										class="custom-file-label mb-1" for="inputFoto">Escolha
-										uma Foto</label>
-								</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Upload Foto</span>
+							</div>
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="imagem"
+									value="${espetaculo.imagemEncoded }" id="inputFoto"> <label
+									class="custom-file-label" for="inputFoto">Escolha uma
+									Foto</label>
 							</div>
 						</div>
+
+						<c:if test="${espetaculo.id ne null}">
+
+							<!-- a imagem será exibida somente no carregaAlterar -->
+							<div class="mb-5">
+								<c:choose>
+									<c:when test="${espetaculo.imagemEncoded ne null }">
+										<a href="#"><img class="img-thumbnail"
+											src="data:image/jpge;base64,${espetaculo.imagemEncoded}"
+											alt=""></a>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${espetaculo.imagemEncoded == '' }">
+										<a href="#"><img class="img-thumbnail"
+											src="/img/no-img.jpg" alt="imagem não encontrada"></a>
+									</c:when>
+								</c:choose>
+							</div>
+						</c:if>
+
+
+
 
 						<div class="form-row">
 							<div class="form-group col-md-8">
@@ -159,7 +182,7 @@
 							</select>
 						</div>
 
-	
+
 						<button type="submit" class="btn btn-primary">Salvar</button>
 						<button class="btn btn-danger" type="reset">Cancelar</button>
 					</form:form>
@@ -176,6 +199,7 @@
 										<th scope="col">Valor</th>
 										<th scope="col">Faixa Etaria</th>
 										<th scope="col">Casa de Show</th>
+										<th scope="col">Foto</th>
 
 
 
@@ -190,6 +214,12 @@
 											<td>${espetaculo.valor}</td>
 											<td>${espetaculo.faixaEtaria}</td>
 											<td>${espetaculo.casa.nome}</td>
+											<td><c:if test="${espetaculo.imagemCasa  != null }">
+													<input type="checkbox" checked="checked"
+														disabled="disabled">
+												</c:if> <c:if test="${espetaculo.imagemCasa == null }">
+													<input type="checkbox" disabled="disabled">
+												</c:if></td>
 									</c:forEach>
 								</tbody>
 							</table>
