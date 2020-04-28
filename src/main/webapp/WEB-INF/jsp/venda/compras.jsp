@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-
+<spring:url value="/vendas/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -74,52 +74,71 @@
 
 					<div class="panel-footer text-center bg-dark purple-gradient">
 						<span class="m-0 text-center text-white" style="font-size: 20px">
-							Compras </span>
+							Vendas </span>
 					</div>
 
-					<form>
-
-						<div class="form-row">
-							<div class="form-group col-md-12">
-								<div class="form-group">
-									<label for="Cliente">Cliente</label> <select id="cliente"
-										class="form-control" name="Cliente">
-										<option value="">Selecione</option>
-										<option value="1">Ze</option>
-										<option value="2">Joao</option>
-									</select>
-								</div>
-							</div>
+					<form:form action="${salva}" cssClass="needs-validation"
+						modelAttribute="venda">
+					<input type="hidden" id="id" value="" />
+					<input type="hidden" id="cliente" value=""/>
+					<input type="hidden" id="espetaculo" value=""/>
+					<input type="hidden" id="quantidade" value=""/>
+					<input type="hidden" id="valor" value=""/>
+					
+					
+					<!--   Cliente -->
+						<div class="form-group">
+							<label for="cliente">Cliente</label> <select id="cliente"
+								class="form-control" name="cliente">
+								<option value="">Selecione</option>
+								<c:forEach var="clientes" items="${clientes}">
+									<c:choose>
+										<c:when test="${compra.id ne null }">
+											<option selected value="${clientes.id}">${clientes.nome}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${clientes.id}">${clientes.nome}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
 						</div>
-
-						<div class="form-row">
-							<div class="form-group col-md-12">
-								<div class="form-group">
-									<label for="espetaculo">Espetaculo</label> <select id="espetaculo"
-										class="form-control" name="espetaculo">
-										<option value="">Selecione</option>
-										<option value="1">Rango Livre</option>
-										<option value="2">Live on-line</option>
-									</select>
-								</div>
-							</div>
+						<!--   Compras -->
+					
+					<!--   Espetaculo -->
+						<div class="form-group">
+							<label for="espetaculo">Espetaculo</label> <select id="espetaculo"
+								class="form-control" name="espetaculo">
+								<option value="">Selecione</option>
+								<c:forEach var="espetaculos" items="${espetaculos}">
+									<c:choose>
+										<c:when test="${compra.id ne null }">
+											<option selected value="${espetaculos.id}">${espetaculos.nome}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${espetaculos.id}">${espetaculos.nome}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
 						</div>
-						
+						<!--   Compras -->
+					
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputQuantidade">Quantidade</label> <input type="number"  max="4"
-									class="form-control" id="inputquantidade">
+								<label for="inputQuantidade">Quantidade</label> <form:input type="number"  max="4"
+									class="form-control" id="inputquantidade" path="quantidade"/>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputValor">Valor</label> <input type="text"
-									class="form-control" id="valor"	 >
+								<label for="inputValor">Valor</label> <form:input type="text"
+									class="form-control" id="valor"	path="valor" />
 							</div>
 						</div>
 						
 						
 						
 						<button type="submit" class="btn btn-primary">Confirmar</button>
-					</form>
+					</form:form>
 
 				</div>
 			</div>

@@ -1,15 +1,10 @@
 package com.qintess.eventos.domain;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,17 +13,6 @@ public class Casa extends AbstractEntity<Long> {
 	
 	private String nome;
 	
-	private String alvara;
-	
-	@Column(name= "vencto_alvara", nullable = true, columnDefinition = "DATE")
-	@DateTimeFormat(iso = ISO.DATE, pattern = "")
-	private LocalDate vencAlvara;
-	
-	private String avcb;
-	
-	@Column(name= "vencto_avcb", nullable = true, columnDefinition = "DATE")
-	@DateTimeFormat(iso = ISO.DATE, pattern = "")
-	private LocalDate vencAvcb;
 	
 	private int capacidade;
 	
@@ -44,7 +28,7 @@ public class Casa extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 80)
 	private String logradouro;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private int numero;
 	
 	@Column(nullable = true, length = 80)
@@ -129,37 +113,6 @@ public class Casa extends AbstractEntity<Long> {
 		this.nome = nome;
 	}
 
-	public String getAlvara() {
-		return alvara;
-	}
-
-	public void setAlvara(String alvara) {
-		this.alvara = alvara;
-	}
-
-	public LocalDate getVencAlvara() {
-		return vencAlvara;
-	}
-
-	public void setVencAlvara(LocalDate vencAlvara) {
-		this.vencAlvara = vencAlvara;
-	}
-
-	public String getAvcb() {
-		return avcb;
-	}
-
-	public void setAvcb(String avcb) {
-		this.avcb = avcb;
-	}
-
-	public LocalDate getVencAvcb() {
-		return vencAvcb;
-	}
-
-	public void setVencAvcb(LocalDate vencAvcb) {
-		this.vencAvcb = vencAvcb;
-	}
 
 	public int getCapacidade() {
 		return capacidade;

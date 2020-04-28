@@ -54,17 +54,7 @@
 	<jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty mensagemErro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
-
-			<c:if test="${not empty mensagemSucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
+		
 		<div class="container mb-5">
 		
 				<div class="panel-footer text-center bg-dark purple-gradient">
@@ -74,7 +64,15 @@
 		
 				<hr>
 
-
+						<div class="col-9">
+							<c:if test="${not empty mensagemErro }">
+								<div id="divMensagemErro" class="alert alert-danger" role="alert">${mensagemErro}</div>
+							</c:if>
+			
+							<c:if test="${not empty mensagemSucesso }">
+								<div id="divMensagemSucesso" class="alert alert-success" role="alert">${mensagemSucesso}</div>
+							</c:if>
+						</div>
 
 				<c:if test="${not empty casa}"></c:if>
 				<table class="table table-sm table-striped">

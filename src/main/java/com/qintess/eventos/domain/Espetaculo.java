@@ -2,13 +2,17 @@ package com.qintess.eventos.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -17,56 +21,50 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Entity
 @Table(name = "espetaculo")
 public class Espetaculo extends AbstractEntity<Long> {
-	
+
 	@Column(nullable = false, length = 80)
 	private String faixaEtaria;
-	
+
 	@Column(nullable = false, columnDefinition = "DATE")
 	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	private LocalDate dataEspetaculo;
-	
+
 	@Column(nullable = false, scale = 2)
 	private BigDecimal valor = new BigDecimal(0);
-	
+
 	@Column(nullable = false)
 	private int capacidade;
-	
+
 	private int destaque;
-	
+
 	@Lob
-	@Column(columnDefinition="mediumblob")
+	@Column(columnDefinition = "mediumblob")
 	private byte[] folder;
+
+	@Transient //esse campo não será persistido no hibernate
+	private String imagemEncoded;
 	
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
 	@JoinColumn(name = "casa_id")
 	public Casa casa;
 
-	@Column(nullable = false, length = 80)
-	private String logradouro;
 	
-	@Column(nullable = false)
-	private int numero;
-	
-	@Column(nullable = true, length = 80)
-	private String complemento;
-	
-	@Column(nullable = true, length = 50)
-	private String bairro;
-	
-	@Column(nullable = false, length = 9)
-	private String cep;
-	
-	@Column(nullable = false, length = 80)
-	private String cidade;
-	
-	@Column(nullable = false, length = 2)
-	private String UF;
-	
-	@Column(nullable = true, length = 2000)
+	@Column(nullable = true, length = 10000)
 	private String descricao;
 
 	@Column(nullable = false, length = 80)
 	private String nome;
+
+	@OneToMany(mappedBy = "espetaculo", cascade = CascadeType.PERSIST)
+	Set<Venda> vendas;
+
+	public Set<Venda> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(Set<Venda> vendas) {
+		this.vendas = vendas;
+	}
 
 	public Espetaculo() {
 
@@ -128,61 +126,6 @@ public class Espetaculo extends AbstractEntity<Long> {
 		this.casa = casa;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getUF() {
-		return UF;
-	}
-
-	public void setUF(String uF) {
-		UF = uF;
-	}
 
 	public String getDescricao() {
 		return descricao;
@@ -200,6 +143,12 @@ public class Espetaculo extends AbstractEntity<Long> {
 		this.nome = nome;
 	}
 
-	
-	
+	public String getImagemEncoded() {
+		return imagemEncoded;
+	}
+
+	public void setImagemEncoded(String imagemEncoded) {
+		this.imagemEncoded = imagemEncoded;
+	}
+
 }

@@ -8,19 +8,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="57x57"
+	href="/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60"
+	href="/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76"
+	href="/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120"
+	href="/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144"
+	href="/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152"
+	href="/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180"
+	href="/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"
+	href="/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96"
+	href="/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="/img/favicon-16x16.png">
 <link rel="manifest" href="/img/manifest.json">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/img/ms-icon-144x144.png">
@@ -93,109 +106,79 @@
 
 		<div class="row row-4">
 
+			<c:forEach var="espetaculo" items="${espetaculos}">
+				<div class="col-lg-4 col-md-4 mb-4">
+					<div class="card h-100" style="max-width: 18rem;">
 
-			<div class="col-lg-4 col-md-4 mb-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="img/1.png" alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#">produto.nome</a>
-						</h4>
-						<h5>R$ produto.valorUnitario</h5>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted"><button
-								class="btn btn-primary btn-sm" >Comprar</button></small> <small
-							class="text-muted">
-							<button class="btn btn-success btn-sm" 
-							data-toggle="modal" data-target="#exampleModalCenter">Detalhes</button></small>
+						<c:choose>
+							<c:when test="${espetaculo.imagemEncoded ne null }">
+								<a href="#"><img class="card-img-top"
+									src="data:image/jpge;base64,${espetaculo.imagemEncoded}" alt=""></a>
+							</c:when>
+						</c:choose>
+
+						<c:choose>
+							<c:when test="${espetaculo.imagemEncoded == null }">
+								<a href="#"><img class="card-img-top" src="/img/no-img.jpg"
+									alt=""></a>
+							</c:when>
+						</c:choose>
+
+					
+						<div class="card-body">
+							<h4 class="card-title">
+								<a href="#">${espetaculo.nome}</a>
+							</h4>
+							<h5>R$ ${espetaculo.valor}</h5>
+							<h5>Capacidade:  ${espetaculo.capacidade}</h5>
+
+						</div>
+						<div class="card-footer">
+							<small class="text-muted"><button
+									class="btn btn-primary btn-sm">Comprar</button></small> <small
+								class="text-muted">
+								<button class="btn btn-success btn-sm" data-toggle="modal"
+									data-target="#exampleModalCenter">Detalhes</button>
+							</small>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="img/2.png" alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#">produto.nome</a>
-						</h4>
-						<h5>R$ produto.valorUnitario</h5>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted"><button
-								class="btn btn-primary btn-sm">Comprar</button></small> <small
-							class="text-muted"><button class="btn btn-success btn-sm">Detalhes</button></small>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="img/2.png" alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#">produto.nome</a>
-						</h4>
-						<h5>R$ produto.valorUnitario</h5>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted"><button
-								class="btn btn-primary btn-sm">Comprar</button></small> <small
-							class="text-muted"><button class="btn btn-success btn-sm">Detalhes</button></small>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top" src="img/2.png" alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#">produto.nome</a>
-						</h4>
-						<h5>R$ produto.valorUnitario</h5>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted"><button
-								class="btn btn-primary btn-sm">Comprar</button></small> <small
-							class="text-muted"><button class="btn btn-success btn-sm">Detalhes</button></small>
-					</div>
-				</div>
-			</div>
-
-
+				</c:forEach>
 		</div>
 
 
 	</div>
-	
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Descricao do Evento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         <div class="container mb-6">
-         	<p>Dados como local e demais informacoes vindas do </p>
-         	<p>Banco de dados do campo descricao</p>
-         	<textarea rows="10" cols="45"> dsdsdssdsdsdsdsdsdsaddasdas</textarea>
-         
-         </div>
-         
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-     
-      </div>
-    </div>
-  </div>
-</div>
+
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Descricao
+						do Evento</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container mb-6">
+						<p>Dados como local e demais informacoes vindas do</p>
+						<p>Banco de dados do campo descricao</p>
+						<textarea rows="10" cols="45"> dsdsdssdsdsdsdsdsdsaddasdas</textarea>
+
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
 </body>

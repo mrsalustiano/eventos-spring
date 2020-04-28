@@ -1,5 +1,8 @@
 package com.qintess.eventos.web.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,10 +67,10 @@ public class CasaController {
 			Long valor = casa.getId();
 			if (valor == null) {
 				service.save(casa);
-				attr.addFlashAttribute("success", "Casa adicionado com sucesso");	
+				attr.addFlashAttribute("mensagemSucesso", "Casa adicionado com sucesso");	
 			} else {
 				service.update(casa);
-				attr.addFlashAttribute("success", "Casa editado com sucesso");
+				attr.addFlashAttribute("mensagemSucesso", "Casa editado com sucesso");
 			}
 		} catch (Exception e) {
 			attr.addFlashAttribute("mensagemErro", "ERRO GRAVE: " + e.getMessage());
@@ -90,7 +93,7 @@ public class CasaController {
 	public String deleta(@PathVariable(name = "id") Long id, RedirectAttributes attr) {
 	
 		service.delete(id);
-		attr.addFlashAttribute("sucesso", "Registro removido");
+		attr.addFlashAttribute("mensagemSucesso", "Casa removida");
 		return "redirect:/admin/casas/listar";
 		
 	}
@@ -100,16 +103,17 @@ public class CasaController {
 	public String carregaAlterar(@PathVariable(name = "id") Long id, Model model, RedirectAttributes attr) {
 		
 	try {
-			
-			
-
 			Casa casa = service.findById(id);
-
+			byte[] encodeBase64 = Base64.getEncoder().encode(casa.getImagemCasa());
+			String base64Encoded = new String(encodeBase64, "UTF-8");
+			casa.setImagemEncoded(base64Encoded);
+			
+			
 			model.addAttribute("casas", service.findAll());
 			model.addAttribute("casa", casa);
 	
 			
-		} catch (Exception e) {
+		} catch (UnsupportedEncodingException e) {
 			attr.addFlashAttribute("mensagemErro", "ERRO GRAVE: " + e.getMessage());
 		}
 		

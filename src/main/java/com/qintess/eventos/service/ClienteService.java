@@ -1,16 +1,14 @@
 package com.qintess.eventos.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.qintess.eventos.domain.Cliente;
 
 public interface ClienteService {
 	
-    
-	void save(Cliente cliente);
+	void save(Cliente Cliente);
 
-    void update(Cliente cliente);
+    void update(Cliente Cliente);
     
     Cliente findById(Long id); 
 
@@ -18,9 +16,8 @@ public interface ClienteService {
 
     List<Cliente> findAll();
     
-    List<Cliente> findBydataNasc(LocalDate dataN);
+    List<Cliente> findByEmail(String email);
     
-    List<Cliente> findBynewsletter(Boolean newsletter);
-    
+    List<Cliente> findByCpf(String cpf);
 
 }

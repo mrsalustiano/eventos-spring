@@ -52,17 +52,7 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
 
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
 
 		<div class="container mb-5">
 			<div class="row">
@@ -75,6 +65,16 @@
 					<form:form action="${salva}" cssClass="needs-validation"
 						modelAttribute="usuario">
 						<form:hidden path="id" />
+						
+						<div class="col-9">
+							<c:if test="${not empty mensagemErro }">
+								<div id="divMensagemErro" class="alert alert-danger" role="alert">${mensagemErro}</div>
+							</c:if>
+			
+							<c:if test="${not empty mensagemSucesso }">
+								<div id="divMensagemSucesso" class="alert alert-success" role="alert">${mensagemSucesso}</div>
+							</c:if>
+						</div>
 						<div class="form-group">
 							<label for="nome">Login</label>
 							<form:input type="text" cssClass="form-control" id="login"
@@ -183,6 +183,15 @@
 				return false;
 			}
 		}
+	</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			//na div de id (#) divMensagemErro
+			//terá uma espera (delay) de 5 secs (5000ms)
+			//será feito um fadeOut lento (frescura)
+			$('#divMensagemErro').delay(5000).fadeOut('slow');
+			$('#divMensagemSucesso').delay(5000).fadeOut('slow');
+		});
 	</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.qintess.eventos.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -27,7 +28,7 @@ public class Usuario extends AbstractEntity<Long> {
 	private Boolean Ativo;
 	
 	@NotNull(message = "Selecione o perfil relativo ao usuario.")
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "id_perfil_fk")
 	private Perfil perfil;
 	

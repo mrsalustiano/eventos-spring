@@ -68,8 +68,7 @@
 						<th scope="col">Nome</th>
 						<th scope="col">Data</th>
 						<th scope="col">Valor</th>
-						<th scope="col">Cidade</th>
-						<th scope="col">UF</th>
+						<th scope="col">Capacidade</th>
 						<th scope="col">Faixa Etaria</th>
 						<th scope="col">Casa de Show</th>
 					</tr>
@@ -81,8 +80,7 @@
 							<td>${espetaculo.nome}</td>
 							<td>${espetaculo.dataEspetaculo}</td>
 							<td>${espetaculo.valor}</td>
-							<td>${espetaculo.cidade}</td>
-							<td>${espetaculo.UF}</td>
+							<td>${espetaculo.capacidade }</td>
 							<td>${espetaculo.faixaEtaria}</td>
 							<td>${espetaculo.casa.nome}</td>
 						</tr>

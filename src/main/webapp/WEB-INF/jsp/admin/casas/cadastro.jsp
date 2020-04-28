@@ -53,17 +53,7 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
 
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
 
 		<div class="container mb-5">
 			<div class="row">
@@ -75,7 +65,15 @@
 					<form:form action="${salva}" method="POST" modelAttribute="casa" enctype="multipart/form-data" cssClass="mb-2">
 					<form:hidden path="id" />
 					<form:hidden path="imagemCasa" />
-				
+						<div class="col-12">
+							<c:if test="${not empty mensagemErro }">
+								<div id="divMensagemErro" class="alert alert-danger" role="alert">${mensagemErro}</div>
+							</c:if>
+			
+							<c:if test="${not empty mensagemSucesso }">
+								<div id="divMensagemSucesso" class="alert alert-success" role="alert">${mensagemSucesso}</div>
+							</c:if>
+						</div>				
 					
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -88,42 +86,20 @@
 							</div>
 						</div>
 
-						<div class="form-row">
-							<div class="form-group col-md-8">
-								<label for="inputAlvara">Alvara</label> 
-								<form:input type="text" path="alvara" placeholder="Alvara" class="form-control" id="inputAlvara" />
-							</div>
-							<div class="form-group col-md-4">
-								<label for="dtAlvara">Data Vencimento</label> 
-								
-								<form:input type="date" path="vencAlvara" class="form-control" id="dtAlvara" />
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-group col-md-8">
-								<label for="inputAVCB">AVCB</label> 
-								<form:input type="text" path="avcb" class="form-control" id="inputAVCB" placeholder="AVCB"/>
-							</div>
-							<div class="form-group col-md-4">
-								<label for="dtAVCB">Data Vencimento</label> 
-								<form:input type="date"  path="vencAvcb" class="form-control" id="dtAVCB" />
-							</div>
-						</div>
 
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">Upload Foto</span>
 							</div>
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="imagem" value="${casa.imagemCasa }" id="inputFoto">
+								<input type="file" class="custom-file-input" name="imagem" value="${casa.imagemEncoded }" id="inputFoto">
 								<label class="custom-file-label" for="inputFoto">Escolha
 									uma Foto</label>
 							</div>
 						</div>
 	
 						
-					<c:if test="${casa.id ne 0}">
+					<c:if test="${casa.id ne null}">
 				
 						<!-- a imagem será exibida somente no carregaAlterar -->
 						<div class="mb-5">
@@ -134,11 +110,14 @@
 									</c:choose>
 									<c:choose>
 									<c:when test="${casa.imagemEncoded == '' }">
-										<a href="#"><img class="img-thumbnail" src="/eventos/resources/img/no-img.jpg" alt="imagem não encontrada"></a>
+										<a href="#"><img class="img-thumbnail" src="/img/no-img.jpg" alt="imagem não encontrada"></a>
 									</c:when>
 								</c:choose>
 						</div>
 					</c:if>
+					
+					
+					
 						<div class="form-row">
 							<div class="form-group col-md-2">
 								<label for="cep">CEP</label> <form:input type="text" path="cep"
@@ -237,5 +216,14 @@
 
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript" src="/js/buscaCep.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			//na div de id (#) divMensagemErro
+			//terá uma espera (delay) de 5 secs (5000ms)
+			//será feito um fadeOut lento (frescura)
+			$('#divMensagemErro').delay(5000).fadeOut('slow');
+			$('#divMensagemSucesso').delay(5000).fadeOut('slow');
+		});
+	</script>
 </body>
 </html>

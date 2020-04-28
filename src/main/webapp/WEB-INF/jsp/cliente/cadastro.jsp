@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-
+<spring:url value="/clientes/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -56,141 +56,79 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
 
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
 
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
-				
+
 					<div class="panel-footer text-center bg-dark purple-gradient">
-						<span class="m-0 text-center text-white" style="font-size:20px"> Cadastro de Cliente</span>
+						<span class="m-0 text-center text-white" style="font-size: 20px">
+							Cadastro de Cliente</span>
 					</div>
-	
-					<form>
 
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputNome">Nome</label> <input type="text"
-									class="form-control" id="inputNome" placeholder="Nome">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="inputCapacidade">CPF</label> <input type="text"
-									class="form-control" id="cpf"
-									onkeypress="$(this).mask('000.000.000-00')" placeholder="CPF">
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="data">Data de Nascimento</label> <input type="date"
-									class="form-control" id="data">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="inputAlvara">Email</label> <input type="text"
-									onblur="validaEmail(this.value)" class="form-control" placeholder="Digite o Email"
-									id="inputAlvara">
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="sexo">Sexo</label> <select id="perfil"
-									class="form-control" name="perfil">
-									<option value="">Selecione</option>
-									<option value="M">Masculino</option>
-									<option value="F">Feminino</option>
-								</select>
-							</div>
-
-							<div class="form-group col-md-4">
-								<label for="inputAlvara">Telefone</label> <input type="text" placeholder="Digite o telefone"
-									onkeypress="$(this).mask('(00) 0000-0000')"
-									class="form-control" id="inputAlvara">
-							</div>
-
-							<div class="form-group col-md-4">
-								<label for="inputAlvara">Celular</label> <input type="text" placeholder="Digite o Celular"
-									onkeypress="$(this).mask('(00) 0000-00000')"
-									class="form-control" id="inputAlvara">
-							</div>
-						</div>
-
-
-
-						<div class="form-row">
-							<div class="form-group col-md-2">
-								<label for="cep">CEP</label> <input type="text"
-									onblur="pesquisacep(this.value);"
-									onkeypress="$(this).mask('00000-000')" class="form-control" placeholder="Digite o CEP"
-									id="cep">
-							</div>
-							<div class="form-group col-md-8">
-								<label for="logradouro">Logradouro</label> <input type="text"
-									class="form-control" id="logradouro">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="numero">Numero</label> <input type="text"
-									placeholder="Numero" class="form-control" id="numero">
-							</div>
-
-						</div>
-
-
-
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="bairro">Bairro</label> <input type="text"
-									class="form-control" id="bairro">
-							</div>
-							<div class="form-group col-md-8">
-								<label for="complemento">Complemento</label> <input type="text"
-									class="form-control" id="complemento" placeholder="complemento">
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-group col-md-10">
-								<label for="cidade">Cidade</label> <input type="text"
-									class="form-control" id="cidade">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="uf">Estado</label> <input type="text"
-									class="form-control" id="uf">
-							</div>
-
-						</div>
+					<form:form action="${salva}" method="POST" modelAttribute="cliente" cssClass="mb-2">
+						<form:hidden path="id"/>
 						
 						<div class="form-row">
+							<div class="col-12">
+								<c:if test="${not empty mensagemErro }">
+									<div id="divMensagemErro" class="alert alert-danger"
+										role="alert">${mensagemErro}</div>
+								</c:if>
+
+								<c:if test="${not empty mensagemSucesso }">
+									<div id="divMensagemSucesso" class="alert alert-success"
+										role="alert">${mensagemSucesso}</div>
+								</c:if>
+							</div>
+
 							<div class="form-group col-md-6">
-								<label for="senha1">Digite a Senha</label>
-								<input type="password" Class="form-control" id="senha1" placeholder="Digite a Senha">
+								<label for="inputNome">Nome</label> <form:input type="text" path="nome"
+									class="form-control" id="inputNome" placeholder="Nome"/>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="senha2">Repita a Senha</label>
-								<input type="password" value="" class="form-control" id="senha2" placeholder="Repita a Senha">
+								<label for="cpf">CPF</label> <form:input type="text"
+									class="form-control" id="cpf"
+									onkeypress="$(this).mask('000.000.000-00')" placeholder="CPF" path="cpf"/>
 							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputEmail">Email</label> <form:input type="text"
+									onblur="validaEmail(this.value)" class="form-control"
+									placeholder="Digite o Email" id="inputEmail"  path="email"/>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputCelular">Celular</label> <form:input type="text"
+									placeholder="Digite o Celular"
+									onkeypress="$(this).mask('(00) 0000-00000')"
+									class="form-control" id="inputCelular" path="celular" />
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="senha1">Digite a Senha</label> <form:input
+									type="password" Class="form-control" id="senha1" path="senhaCliente"
+									placeholder="Digite a Senha"/>
+							</div>
+				
 						</div>
 
 						<div class="form-group">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="newsletter">
+								<form:checkbox  path="newsletter"/>
 								<label class="form-check-label" for="newsletter"> Deseja
 									Receber Newsletter </label>
 							</div>
 						</div>
 
 						<button type="submit" class="btn btn-primary">Salvar</button>
-					</form>
+						<button type="reset" class="btn btn-danger">Cancelar</button>
+					</form:form>
 
 				</div>
 			</div>
@@ -199,7 +137,6 @@
 
 
 	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
-	<script type="text/javascript" src="/js/buscaCep.js"></script>
 	<script type="text/javascript" src="/js/funcoes.js"></script>
 </body>
 </html>

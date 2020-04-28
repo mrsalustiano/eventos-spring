@@ -53,30 +53,32 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
 
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
 
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 					<div class="panel-footer text-center bg-dark purple-gradient">
-						<span class="m-0 text-center text-white" style="font-size:20px"> Cadastro de Espetáculo</span>
+						<span class="m-0 text-center text-white" style="font-size: 20px">
+							Cadastro de Espetáculo</span>
 					</div>
 
 					<form:form action="${salva}" method="POST"
 						modelAttribute="espetaculo" enctype="multipart/form-data"
 						cssClass="mb-2">
-						<form:hidden path="id" />
 
+						<form:hidden path="id" />
+						<div class="col-9">
+							<c:if test="${not empty mensagemErro }">
+								<div id="divMensagemErro" class="alert alert-danger"
+									role="alert">${mensagemErro}</div>
+							</c:if>
+
+							<c:if test="${not empty mensagemSucesso }">
+								<div id="divMensagemSucesso" class="alert alert-success"
+									role="alert">${mensagemSucesso}</div>
+							</c:if>
+						</div>
 
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -135,63 +137,29 @@
 							<div class="form-group col-md-8">
 								<label for="inputDescricao">Descricao</label>
 								<form:textarea path="descricao" id="descricao" rows="10"
-									cols="86" maxlength="2000" />
+									cols="86" maxlength="10000" />
 							</div>
 						</div>
 
+
 						<div class="form-group">
-							<label for="casasLista">Casas de Show </label> <select id="casa"
+							<label for="casasLista">Casa de Show</label> <select id="casa"
 								class="form-control" name="casa">
 								<option value="">Selecione</option>
 								<c:forEach var="casa" items="${casa}">
-									<option value="${casa.id}">${casa.nome}</option>
-
+									<c:choose>
+										<c:when test="${espetaculo.id ne null }">
+											<option selected value="${casa.id}">${casa.nome}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${casa.id}">${casa.nome}</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</select>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-2">
-								<label for="cep">CEP</label>
-								<form:input type="text" path="cep"
-									onblur="pesquisacep(this.value);" class="form-control" id="cep" />
-							</div>
-							<div class="form-group col-md-8">
-								<label for="logradouro">Logradouro</label>
-								<form:input type="text" path="logradouro" class="form-control"
-									id="logradouro" />
-							</div>
-							<div class="form-group col-md-2">
-								<label for="numero">Numero</label>
-								<form:input type="text" path="numero" placeholder="Numero"
-									class="form-control" id="numero" />
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="bairro">Bairro</label>
-								<form:input type="text" path="bairro" class="form-control"
-									id="bairro" />
-							</div>
-							<div class="form-group col-md-8">
-								<label for="complemento">Complemento</label>
-								<form:input type="text" path="complemento" class="form-control"
-									id="complemento" placeholder="complemento" />
-							</div>
-						</div>
 
-						<div class="form-row">
-							<div class="form-group col-md-10">
-								<label for="cidade">Cidade</label>
-								<form:input type="text" path="cidade" class="form-control"
-									id="cidade" />
-							</div>
-							<div class="form-group col-md-2">
-								<label for="uf">Estado</label>
-								<form:input type="text" path="UF" class="form-control" id="uf" />
-							</div>
-
-						</div>
-
+	
 						<button type="submit" class="btn btn-primary">Salvar</button>
 						<button class="btn btn-danger" type="reset">Cancelar</button>
 					</form:form>
@@ -206,12 +174,10 @@
 										<th scope="col">Nome</th>
 										<th scope="col">Data</th>
 										<th scope="col">Valor</th>
-										<th scope="col">Cidade</th>
-										<th scope="col">UF</th>
 										<th scope="col">Faixa Etaria</th>
 										<th scope="col">Casa de Show</th>
-									
-										
+
+
 
 									</tr>
 								</thead>
@@ -222,8 +188,6 @@
 											<td>${espetaculo.nome}</td>
 											<td>${espetaculo.dataEspetaculo}</td>
 											<td>${espetaculo.valor}</td>
-											<td>${espetaculo.cidade}</td>
-											<td>${espetaculo.UF}</td>
 											<td>${espetaculo.faixaEtaria}</td>
 											<td>${espetaculo.casa.nome}</td>
 									</c:forEach>
@@ -237,5 +201,15 @@
 	</div>
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript" src="/js/buscaCep.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//na div de id (#) divMensagemErro
+			//terá uma espera (delay) de 5 secs (5000ms)
+			//será feito um fadeOut lento (frescura)
+			$('#divMensagemErro').delay(5000).fadeOut('slow');
+			$('#divMensagemSucesso').delay(5000).fadeOut('slow');
+		});
+	</script>
+
 </body>
 </html>

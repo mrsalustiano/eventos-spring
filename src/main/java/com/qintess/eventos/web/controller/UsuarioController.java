@@ -64,10 +64,10 @@ public class UsuarioController {
 		Long valor = usuario.getId();
 		if (valor == null) {
 			usuarioService.save(usuario);
-			attr.addFlashAttribute("success", "Usuario adicionado com sucesso");	
+			attr.addFlashAttribute("mensagemSucesso", "Usuario adicionado com sucesso");	
 		} else {
 			usuarioService.update(usuario);
-			attr.addFlashAttribute("success", "Usuario editado com sucesso");
+			attr.addFlashAttribute("mensagemSucesso", "Usuario editado com sucesso");
 		}
 		
 		
@@ -88,7 +88,7 @@ public class UsuarioController {
 	public String deleta(@PathVariable(name = "id") Long id, RedirectAttributes attr) {
 	
 		usuarioService.delete(id);
-		attr.addFlashAttribute("sucesso", "Registro removido");
+		attr.addFlashAttribute("mensagemSucesso", "Usuario removido com sucesso");
 		return "redirect:/admin/usuarios/listar";
 		
 	}
@@ -102,7 +102,7 @@ public class UsuarioController {
 			model.addAttribute("usuario", usuario);
 
 		} catch (Exception e) {
-			attr.addFlashAttribute("erro", "ERRO GRAVE: " + e.getMessage());
+			attr.addFlashAttribute("mensagemErro", "ERRO GRAVE: " + e.getMessage());
 
 		}
 		return "admin/usuario/cadastro";

@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,20 +52,19 @@
 </head>
 </head>
 <body>
+
 	<jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty mensagemErro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
-
-			<c:if test="${not empty mensagemSucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
+			<div class="col-12">
+				<c:if test="${not empty mensagemErro }">
+						<div id="divMensagemErro" class="alert alert-danger" role="alert">${mensagemErro}</div>
+				</c:if>
+	
+				<c:if test="${not empty mensagemSucesso }">
+						<div id="divMensagemSucesso" class="alert alert-success" role="alert">${mensagemSucesso}</div>
+				</c:if>
+			</div>
 		<div class="container mb-5">
 				<div class="panel-footer text-center bg-dark purple-gradient">
 					<span class="m-0 text-center text-white" style="font-size: 20px">Listagem
@@ -82,8 +82,6 @@
 						<th scope="col">Nome</th>
 						<th scope="col">Data</th>
 						<th scope="col">Valor</th>
-						<th scope="col">Cidade</th>
-						<th scope="col">UF</th>
 						<th scope="col">Faixa Etaria</th>
 						<th scope="col">Casa de Show</th>
 						<th scope="col" colspan="2">Ações</th>
@@ -95,10 +93,9 @@
 						<tr>
 							<td>${espetaculo.id}</td>
 							<td>${espetaculo.nome}</td>
+							
 							<td>${espetaculo.dataEspetaculo}</td>
 							<td>${espetaculo.valor}</td>
-							<td>${espetaculo.cidade}</td>
-							<td>${espetaculo.UF}</td>
 							<td>${espetaculo.faixaEtaria}</td>
 							<td>${espetaculo.casa.nome}</td>
 							<td><a href="${altera}${espetaculo.id}" class="btn btn-info">Alterar</a></td>

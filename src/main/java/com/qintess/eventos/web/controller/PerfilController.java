@@ -51,18 +51,19 @@ public class PerfilController {
 
 	@RequestMapping("/salva")
 	@Transactional
-	public String salva(@ModelAttribute Perfil perfil) {
+	public String salva(@ModelAttribute Perfil perfil, RedirectAttributes attr) {
 
 		Long valor = perfil.getId();
 		if (valor == null) {
 			perfilService.save(perfil);
+			attr.addFlashAttribute("mensagemSucesso", "Perfil adicionado com sucesso");	
 			
 		} else {
 			perfilService.update(perfil);
+			attr.addFlashAttribute("mensagemSucesso", "Perfil Alterado com sucesso");
 			
 		}
 	
-			//redirectAtt.addFlashAttribute("mensagemSucesso", "Produto cadastrado com sucesso!");
 		
 		return "redirect:/admin/perfis/cadastrar";
 
@@ -80,7 +81,7 @@ public class PerfilController {
 	@Transactional
 	public String deleta(@PathVariable(name = "id") Long id, RedirectAttributes attr) {
 		perfilService.delete(id);
-		attr.addFlashAttribute("sucesso", "Registro removido");
+		attr.addFlashAttribute("mensagemSucesso", "Perfil removido");
 		return "redirect:/admin/perfis/listar";
 	}
 
@@ -94,7 +95,7 @@ public class PerfilController {
 			model.addAttribute("perfil", perfil);
 
 		} catch (Exception e) {
-			attr.addFlashAttribute("erro", "ERRO GRAVE: " + e.getMessage());
+			attr.addFlashAttribute("mensagemErro", "ERRO GRAVE: " + e.getMessage());
 
 		}
 		return "admin/perfil/cadastro";

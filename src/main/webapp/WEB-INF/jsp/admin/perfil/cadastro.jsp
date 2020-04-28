@@ -53,17 +53,7 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
-
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
+		
 
 		<div class="container mb-5">
 			<div class="row">
@@ -78,6 +68,15 @@
 						modelAttribute="perfil">
 						<form:hidden path="id" />
 						<div class="form-row">
+						<div class="col-12">
+							<c:if test="${not empty mensagemErro }">
+									<div id="divMensagemErro" class="alert alert-danger" role="alert">${mensagemErro}</div>
+							</c:if>
+
+							<c:if test="${not empty mensagemSucesso }">
+									<div id="divMensagemSucesso" class="alert alert-success" role="alert">${mensagemSucesso}</div>
+							</c:if>
+						</div>
 							<div class="col-md-6 mb-3">
 								<label>Nome do Perfil</label>
 								<form:input path="nome" cssClass="form-control"
@@ -139,5 +138,14 @@
 		</div>
 	</div>
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//na div de id (#) divMensagemErro
+			//terá uma espera (delay) de 5 secs (5000ms)
+			//será feito um fadeOut lento (frescura)
+			$('#divMensagemErro').delay(5000).fadeOut('slow');
+			$('#divMensagemSucesso').delay(5000).fadeOut('slow');
+		});
+	</script>
 </body>
 </html>

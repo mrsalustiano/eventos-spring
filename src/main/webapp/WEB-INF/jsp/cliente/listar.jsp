@@ -8,9 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-<spring:url value="/admin/perfis/deleta/" var="deleta"></spring:url>
-<spring:url value="/admin/perfis/altera/" var="altera"></spring:url>
-<spring:url value="/admin/perfis/salva" var="salva"></spring:url>
+<spring:url value="/clientes/deleta/" var="deleta"></spring:url>
+<spring:url value="/clientes/altera/" var="altera"></spring:url>
+<spring:url value="/clientes/salva" var="salva"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -51,7 +51,7 @@
 </head>
 </head>
 <body>
-	<jsp:include page="${request.contextPath}/cabecalho"></jsp:include>
+	<jsp:include page="${request.contextPath}/cabecalhoPrincipal"></jsp:include>
 
 	<div class="container mt-5 ">
 		<br>
@@ -67,41 +67,51 @@
 		<div class="container mb-5">
 				<div class="panel-footer text-center bg-dark purple-gradient">
 					<span class="m-0 text-center text-white" style="font-size: 20px">Listagem
-						de Perfil</span>
+						de Clientes</span>
 				</div>
 			<hr>
 
 
 	
-			<c:if test="${not empty perfis}"></c:if>
-				<table class="table table-sm table-striped">
+			<c:if test="${not empty clientes}"></c:if>
+				<table class="table table-sm  table-striped">
 					<thead class="thead">
 						<tr>
 							<th scope="col">Codigo</th>
 							<th scope="col">Nome</th>
-							<th scope="col">Descrição</th>
-							<th scope="col">Ativo</th>
+							<th scope="col">CPF</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Celular</th>
+							<th scope="col">Data Nasc.</th>
+							<th scope="col">Cidade</th>
+							<th scope="col">UF</th>
+							<th scope="col">NewsLetter</th>
 							<th scope="col" colspan="2">Ações</th>
 							
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="perfil" items="${perfis}">
+						<c:forEach var="cliente" items="${clientes}">
 							<tr >
-								<td>${perfil.id}</td>
-								<td>${perfil.nome}</td>
-								<td>${perfil.descricao}</td>
+								<td>${cliente.id}</td>								
+								<td>${cliente.nome}</td>
+								<td>${cliente.cpf}</td>
+								<td>${cliente.email}</td>
+								<td>${cliente.celular}</td>
+								<td>${cliente.dataNasc}</td>
+								<td>${cliente.cidade}</td>
+								<td>${cliente.UF}</td>
 								<td>
-									<c:if test="${perfil.ativo == true }">
+									<c:if test="${cliente.newsletter == true }">
 								    	<input type="checkbox" checked="checked" disabled="disabled">
 									</c:if> 
-									<c:if test="${perfil.ativo == false }">
+									<c:if test="${cliente.newsletter == false }">
 									    <input type="checkbox"  disabled="disabled">
 									</c:if> 								
 								</td>
 								
-							<td><a href="${altera}${perfil.id}" class="btn btn-info">Alterar</a></td>
-							<td><a href="#" class="btn btn-danger" data-href="${deleta}${perfil.id}" data-toggle="modal"
+							<td><a href="${altera}${cliente.id}" class="btn btn-info">Alterar</a></td>
+							<td><a href="#" class="btn btn-danger" data-href="${deleta}${cliente.id}" data-toggle="modal"
 										data-target="#confirm-delete">Apagar</a><br></td>	  
 						</tr>
 						
@@ -138,7 +148,7 @@
 		</div>
 
 </div>
-	<jsp:include page="${request.contextPath}/footer"></jsp:include>
+	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			//na div de id (#) divMensagemErro
