@@ -137,7 +137,8 @@
 							<small class="text-muted"><button
 									class="btn btn-primary btn-sm">Comprar</button></small> <small
 								class="text-muted">
-								<button class="btn btn-success btn-sm" data-toggle="modal" data-id="${espetaculo.descricao}"
+								
+								<button class="btn btn-success btn-sm modal-btn " data-toggle="modal" data-some-id="${espetaculo.descricao}" data-nome="descricao"
 									data-target="#exampleModalCenter">Detalhes</button>
 							</small>
 						</div>
@@ -148,6 +149,12 @@
 
 
 	</div>
+	
+	
+	
+
+
+
 
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -164,9 +171,9 @@
 				</div>
 				<div class="modal-body">
 					<div class="container mb-6">
-						<p>Dados como local e demais informacoes vindas do</p>
-						<p>Banco de dados do campo descricao</p>
-						<div class="col-6">${espetaculo.descricao}</div> 
+						<div class="modal-body modal-content">
+     						<p  name="hiddenValue" id="hiddenValue" ></p>
+   						</div> 
 
 					</div>
 
@@ -181,5 +188,13 @@
 	</div>
 
 	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
+	<script type="text/javascript">
+    $(function () {
+        $(".modal-btn").click(function (){
+          var data_var = $(this).data('some-id');
+          $(".modal-body p").text(data_var);
+        })
+       });
+</script>
 </body>
 </html>
