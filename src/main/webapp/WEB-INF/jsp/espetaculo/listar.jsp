@@ -3,12 +3,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Eventos - Qintess</title>
-
+<spring:url value="/vendas/comprar" var="comprar"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -69,8 +70,9 @@
 						<th scope="col">Data</th>
 						<th scope="col">Valor</th>
 						<th scope="col">Capacidade</th>
-						<th scope="col">Faixa Etaria</th>
 						<th scope="col">Casa de Show</th>
+						<th scope="col" colspan="2">Ações</th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -78,11 +80,14 @@
 						<tr>
 							
 							<td>${espetaculo.nome}</td>
-							<td>${espetaculo.dataEspetaculo}</td>
+							<td><tags:localDate date="${espetaculo.dataEspetaculo}" /> </td>
 							<td>${espetaculo.valor}</td>
 							<td>${espetaculo.capacidade }</td>
-							<td>${espetaculo.faixaEtaria}</td>
 							<td>${espetaculo.casa.nome}</td>
+							<td><a href="${comprar}/${espetaculo.id}" class="btn btn-info">Comprar</a></td>
+							<td><button class="btn btn-success modal-btn" data-toggle="modal" data-some-id="${espetaculo.descricao}" data-nome="descricao"
+									data-target="#exampleModalCenter">Detalhes</button>
+								</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -91,8 +96,49 @@
 		</div>
 	</div>
 
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"><b >Descrição	do Evento</b></h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container mb-6">
+						<div class="modal-body modal-content">
+     						<p  name="hiddenValue" id="hiddenValue" ></p>
+   						</div> 
+
+					</div>
+
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	
-	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
+	
+
+		<jsp:include page="${request.contextPath}/footer"></jsp:include>
+		<script type="text/javascript">
+	    $(function () {
+	        $(".modal-btn").click(function (){
+	          var data_var = $(this).data('some-id');
+	          $(".modal-body p").text(data_var);
+	        })
+	       });
+
+		</script>
 	
 </body>
 </html>

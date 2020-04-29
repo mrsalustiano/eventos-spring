@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +97,7 @@
 							<td>${espetaculo.id}</td>
 							<td>${espetaculo.nome}</td>
 							
-							<td>${espetaculo.dataEspetaculo}</td>
+							<td><tags:localDate date="${espetaculo.dataEspetaculo}"/> </td>
 							<td>${espetaculo.valor}</td>
 							<td>${espetaculo.faixaEtaria}</td>
 							<td>${espetaculo.capacidade}</td>

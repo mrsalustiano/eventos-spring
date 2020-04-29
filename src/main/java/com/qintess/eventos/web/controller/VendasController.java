@@ -64,10 +64,10 @@ public class VendasController {
 	
 	
 	@GetMapping("/listar")
-	public String listar(ModelMap model	,BindingResult result) {
-		model.addAttribute("vendas", service.findAll());
+	public String listar(Venda venda, ModelMap model	,BindingResult result) {
+		model.addAttribute("venda", service.findAll());
 		
-		return "venda/compras";
+		return "admin/venda/listar";
 	}
 	
 

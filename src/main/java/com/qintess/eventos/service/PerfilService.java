@@ -19,7 +19,7 @@ public interface PerfilService {
     
     List<Perfil> findByNome(String nome);
     
-    List<Perfil> findByAtivo(Boolean ativo);
+  
 
 	
 }

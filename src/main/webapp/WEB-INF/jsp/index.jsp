@@ -117,26 +117,26 @@ h6 {
 
 			<c:forEach var="espetaculo" items="${espetaculos}">
 				<div class="col-lg-4 col-md-4 mb-4">
-					<div class="card h-100" style="max-width: 18rem;">
-
+					<div class="card h-100" style="max-width: 20rem;">
+					
 						<c:choose>
 							<c:when test="${espetaculo.imagemEncoded ne null }">
-								<a href="#"><img class="card-img-top"
+								<a href="${comprar}/${espetaculo.id}"><img class="card-img-top"
 									src="data:image/jpge;base64,${espetaculo.imagemEncoded}" alt=""></a>
 							</c:when>
 						</c:choose>
 
 						<c:choose>
-							<c:when test="${espetaculo.imagemEncoded == null }">
-								<a href="#"><img class="card-img-top" src="/img/no-img.jpg"
-									alt=""></a>
+							<c:when test="${espetaculo.imagemEncoded == '' }">
+								<a href="${comprar}/${espetaculo.id}"><img class="card-img-top" src="/img/no-img.jpg"
+									alt="Sem Imagem"></a>
 							</c:when>
 						</c:choose>
 
 					
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="#">${espetaculo.nome}</a>
+								<a href="${comprar}/${espetaculo.id}">${espetaculo.nome}</a>
 							</h4>
 							<h5>R$ ${espetaculo.valor}</h5>
 							<h5>Capacidade:  ${espetaculo.capacidade}</h5>
@@ -144,19 +144,21 @@ h6 {
 						</div>
 						<div class="card-footer">
 								<c:if test="${espetaculo.capacidade == 0 }">
-									<small class="text-muted"><a href="#"
+									<small class="text-muted"><a 
 									class="btn btn-warning btn-sm">Esgotado</a>
+									</small>
 								</c:if>
 			
 								<c:if test="${espetaculo.capacidade > 0 }">
 			
-							<small class="text-muted"><a href="${comprar}/${espetaculo.id}"
+									<small class="text-muted"><a href="${comprar}/${espetaculo.id}"
 									class="btn btn-primary btn-sm">Comprar</a>
+									</small>
 								</c:if>
 								
 								<button class="btn btn-success btn-sm modal-btn " data-toggle="modal" data-some-id="${espetaculo.descricao}" data-nome="descricao"
 									data-target="#exampleModalCenter">Detalhes</button>
-							</small>
+							
 						</div>
 					</div>
 				</div>

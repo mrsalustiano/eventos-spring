@@ -18,6 +18,6 @@ public interface PerfilDao {
     
     List<Perfil> findByNome(String nome);
     
-    List<Perfil> findByAtivo(Boolean ativo);
+
 
 	}

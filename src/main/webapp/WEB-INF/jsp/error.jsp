@@ -45,7 +45,7 @@
 					<h4>
 						<span>Código do Erro : ${status} </span>
 					</h4>
-					<p><h3>"${error}</h3></p>
+					<h3><span>"${error}</span></h3>
 
 
 

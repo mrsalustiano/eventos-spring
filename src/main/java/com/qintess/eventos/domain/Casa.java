@@ -14,8 +14,6 @@ public class Casa extends AbstractEntity<Long> {
 	private String nome;
 	
 	
-	private int capacidade;
-	
 	@Lob
 	@Column(columnDefinition="mediumblob")
 	private byte[] imagemCasa;
@@ -114,15 +112,6 @@ public class Casa extends AbstractEntity<Long> {
 	}
 
 
-	public int getCapacidade() {
-		return capacidade;
-	}
-
-	public void setCapacidade(int capacidade) {
-		this.capacidade = capacidade;
-	}
-
-	
 	public byte[] getImagemCasa() {
 		return imagemCasa;
 	}

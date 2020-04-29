@@ -42,7 +42,9 @@
 									class="dropdown-item " href="/admin/perfis/listar">Perfil de Usuario</a> <a
 									class="dropdown-item " href="/admin/usuarios/listar">Usuario</a> <a
 									class="dropdown-item " href="/admin/casas/listar">Casa de Show</a>
-								<a  class="dropdown-item"  href="/clientes/listar">Clientes  - Editar</a>	
+								<a  class="dropdown-item"  href="/clientes/listar">Listagem de Clientes</a>	
+								<a  class="dropdown-item"  href="/vendas/listar">Listagem de Vendas</a>	
+								
 							</div></li>
 						<!-- Dropdown -->
 						<li class="nav-item dropdown"><a

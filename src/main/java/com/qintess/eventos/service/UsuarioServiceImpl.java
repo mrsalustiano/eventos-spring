@@ -53,11 +53,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return dao.findByLogin(login);
 	}
 
-	@Override
-	public List<Usuario> findByAtivo(Boolean ativo) {
-		
-		return dao.findByAtivo(ativo);
-	}
+
 
 
 

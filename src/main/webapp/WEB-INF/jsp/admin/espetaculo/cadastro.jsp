@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,7 +117,7 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label for="inputValor">Valor</label>
-								<form:input type="text" path="valor" class="form-control"
+								<form:input type="text" path="valor" class="form-control" 
 									id="inputValor" />
 							</div>
 						</div>
@@ -212,7 +213,7 @@
 										<tr>
 											<td>${espetaculo.id}</td>
 											<td>${espetaculo.nome}</td>
-											<td>${espetaculo.dataEspetaculo}</td>
+											<td><tags:localDate date="${espetaculo.dataEspetaculo}"/> </td>
 											<td>${espetaculo.valor}</td>
 											<td>${espetaculo.faixaEtaria}</td>
 											<td>${espetaculo.casa.nome}</td>
@@ -234,6 +235,8 @@
 	<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	<script type="text/javascript" src="/js/buscaCep.js"></script>
 	<script type="text/javascript">
+	
+	
 		$(document).ready(function() {
 			//na div de id (#) divMensagemErro
 			//terá uma espera (delay) de 5 secs (5000ms)

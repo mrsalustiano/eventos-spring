@@ -9,13 +9,6 @@ import com.qintess.eventos.domain.Usuario;
 public class UsuarioDaoImpl extends AbstractDao<Usuario, Long> implements UsuarioDao{
 
 
-	
-
-	@Override
-	public List<Usuario> findByAtivo(Boolean ativo) {
- 
-		return createQuery("select u from Usuario u where u.ativo = ?1  ", ativo);
-	}
 
 	@Override
 	public List<Usuario> findByLogin(String login) {

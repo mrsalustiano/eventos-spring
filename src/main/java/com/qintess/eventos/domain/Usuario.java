@@ -25,7 +25,7 @@ public class Usuario extends AbstractEntity<Long> {
 	@Column(name = "senha", nullable = false, length = 60)
 	private String Senha;
 	
-	private Boolean Ativo;
+
 	
 	@NotNull(message = "Selecione o perfil relativo ao usuario.")
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
@@ -63,18 +63,6 @@ public class Usuario extends AbstractEntity<Long> {
 
 
 
-	public Boolean getAtivo() {
-		return Ativo;
-	}
-
-
-
-	public void setAtivo(Boolean ativo) {
-		Ativo = ativo;
-	}
-
-
-
 	public Perfil getPerfil() {
 		return perfil;
 	}
@@ -89,7 +77,7 @@ public class Usuario extends AbstractEntity<Long> {
 
 	@Override
 	public String toString() {
-		return "Usuario [login=" + login + ", Senha=" + Senha + ", Ativo=" + Ativo + ", perfil=" + perfil + "]";
+		return "Usuario [login=" + login + ", Senha=" + Senha + ", perfil=" + perfil + "]";
 	}
 
 		

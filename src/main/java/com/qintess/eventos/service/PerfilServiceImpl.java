@@ -50,10 +50,8 @@ public class PerfilServiceImpl implements PerfilService {
 		return dao.findByNome(nome);
 	}
 
-	@Override
-	public List<Perfil> findByAtivo(Boolean ativo) {
-	
-		return dao.findByAtivo(ativo);
-	}
+
+
+
 
 }

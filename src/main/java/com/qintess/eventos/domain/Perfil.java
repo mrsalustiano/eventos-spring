@@ -24,7 +24,7 @@ public class Perfil extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 80)
 	private String descricao;
 	
-	private Boolean ativo;
+
 
 	@OneToMany(mappedBy = "perfil")
 	private List<Usuario> usuarios;
@@ -49,13 +49,7 @@ public class Perfil extends AbstractEntity<Long> {
 		this.descricao = descricao;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
-	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;

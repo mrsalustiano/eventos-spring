@@ -76,14 +76,11 @@
 						</div>				
 					
 						<div class="form-row">
-							<div class="form-group col-md-6">
+							<div class="form-group col-md-12">
 								<label for="inputNome">Nome</label> 
 								<form:input path="nome" type="text" class="form-control" id="inputNome" placeholder="Nome" />
 							</div>
-							<div class="form-group col-md-6">
-								<label for="inputCapacidade">Capacidade</label> 
-								<form:input path="capacidade" type="number" class="form-control" id="inputCapacidade"/>
-							</div>
+					
 						</div>
 
 
@@ -169,7 +166,7 @@
 									<tr>
 										<th scope="col">Codigo</th>
 										<th scope="col">Nome</th>
-										<th scope="col">Capacidade</th>
+						
 										<th scope="col">CEP</th>
 										<th scope="col">Logradouro</th>
 										<th scope="col">Numero</th>
@@ -187,7 +184,7 @@
 										<tr>
 											<td>${casa.id}</td>
 											<td>${casa.nome}</td>
-											<td>${casa.capacidade}</td>
+							
 											<td>${casa.cep}</td>
 											<td>${casa.logradouro}</td>
 											<td>${casa.numero}</td>

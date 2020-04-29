@@ -18,6 +18,6 @@ public interface UsuarioService {
     
     List<Usuario> findByLogin(String login);
     
-    List<Usuario> findByAtivo(Boolean ativo);
+  
 
 }
