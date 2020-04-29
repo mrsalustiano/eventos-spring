@@ -156,6 +156,8 @@
 						</div>
 						<button type="submit" class="btn btn-primary">Salvar</button>
 						<button class="btn btn-danger" type="reset">Cancelar</button>
+						<button class="btn btn-success" type="button" onclick="javascript:history.back()">Voltar</button>
+				
 					</form:form>
 					
 					

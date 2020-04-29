@@ -70,7 +70,7 @@
 						<form:hidden path="id" />
 						<form:hidden path="imagemCasa" />
 
-						<div class="col-9">
+						<div class="col-12">
 							<c:if test="${not empty mensagemErro }">
 								<div id="divMensagemErro" class="alert alert-danger"
 									role="alert">${mensagemErro}</div>
@@ -185,6 +185,8 @@
 
 						<button type="submit" class="btn btn-primary">Salvar</button>
 						<button class="btn btn-danger" type="reset">Cancelar</button>
+						<button class="btn btn-success" type="button"
+							onclick="javascript:history.back()">Voltar</button>
 					</form:form>
 
 					<div class="row">

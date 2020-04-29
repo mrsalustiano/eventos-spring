@@ -99,6 +99,7 @@
 							<div class="col-md-8 ">
 								<button class="btn btn-primary" type="submit">Salvar</button>
 								<button class="btn btn-danger" type="reset">Cancelar</button>
+								<button class="btn btn-success" type="button" onclick="javascript:history.back()">Voltar</button>
 							</div>
 						</div>
 					</form:form>

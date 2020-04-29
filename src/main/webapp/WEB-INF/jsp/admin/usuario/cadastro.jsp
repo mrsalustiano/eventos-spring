@@ -65,14 +65,16 @@
 					<form:form action="${salva}" cssClass="needs-validation"
 						modelAttribute="usuario">
 						<form:hidden path="id" />
-						
-						<div class="col-9">
+
+						<div class="col-12">
 							<c:if test="${not empty mensagemErro }">
-								<div id="divMensagemErro" class="alert alert-danger" role="alert">${mensagemErro}</div>
+								<div id="divMensagemErro" class="alert alert-danger"
+									role="alert">${mensagemErro}</div>
 							</c:if>
-			
+
 							<c:if test="${not empty mensagemSucesso }">
-								<div id="divMensagemSucesso" class="alert alert-success" role="alert">${mensagemSucesso}</div>
+								<div id="divMensagemSucesso" class="alert alert-success"
+									role="alert">${mensagemSucesso}</div>
 							</c:if>
 						</div>
 						<div class="form-group">
@@ -129,6 +131,8 @@
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 						<button class="btn btn-danger" type="reset">Cancelar</button>
+						<button class="btn btn-success" type="button"
+							onclick="javascript:history.back()">Voltar</button>
 					</form:form>
 
 
@@ -184,7 +188,7 @@
 			}
 		}
 	</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function() {
 			//na div de id (#) divMensagemErro
 			//terá uma espera (delay) de 5 secs (5000ms)

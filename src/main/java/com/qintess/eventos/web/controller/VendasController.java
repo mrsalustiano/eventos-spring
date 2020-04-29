@@ -1,5 +1,6 @@
 package com.qintess.eventos.web.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -46,11 +47,19 @@ public class VendasController {
 	
 	
 	
-	@GetMapping("/comprar")
-	public String comprar(Venda venda, ModelMap model) {
-		model.addAttribute("vendas", service.findAll());
+	@GetMapping("/comprar/{id}")
+	public String comprar(@PathVariable("id") Long id, Venda venda, ModelMap model, RedirectAttributes attr) {
 		
-		return "venda/compras";
+	
+
+			model.addAttribute("vendas", service.findAll());
+			
+			return "venda/compras";
+
+			
+	
+		
+		
 	}
 	
 	
@@ -65,18 +74,74 @@ public class VendasController {
 	@Transactional
 	@RequestMapping("/salva")
 	public String salvar(@ModelAttribute Venda venda, RedirectAttributes attr ) {
-		
 		Long valor = venda.getId();
-		if (valor == null) {
-			service.save(venda);
-			attr.addFlashAttribute("mensagemSucesso", "Venda efetuada com sucesso");	
-		} else {
-			service.update(venda);
-			attr.addFlashAttribute("mensagemSucesso", "Venda atualizada com sucesso");
+		
+	
+		Long idEspetaculo = 0L;
+		int qtd = 0;
+		BigDecimal valores;
+		BigDecimal total;
+		int qtdJaVendida = 0;
+		
+	
+		idEspetaculo = venda.getEspetaculo().getId().longValue();
+		qtd = venda.getQuantidade();
+		valores = venda.getEspetaculo().getValor();
+		total =  valores.multiply(new BigDecimal(qtd));
+		
+		if (qtd > 4) {
+			attr.addFlashAttribute("mensagemErro", "Limite de ingresso excedido somente 4 por evento");
+			return "redirect:/vendas/";
 		}
 		
 		
-		return "redirect:/vendas/comprar";
+		// Verifica se o total nao vai ficar negativo
+		venda.setValor(total);
+		Espetaculo esp = espetaculoService.findById(idEspetaculo);
+		int capacidade  = esp.getCapacidade();
+		capacidade = (esp.getCapacidade() - qtd);
+		if (capacidade < 0 ) {
+			attr.addFlashAttribute("mensagemErro", "Quantidade de ingresso maior que disponivel");
+			return "redirect:/vendas/";
+
+		} else {
+			esp.setCapacidade(capacidade);
+				
+		}
+		
+		// pega a lista das compras dos ingressos do show e compara para nao passar de 4 ingressos
+		
+		List<Venda> vendaAntiga =  service.findByClienteEspetaculo(venda.getCliente(), venda.getEspetaculo());
+			
+		
+		for (Venda venda2 : vendaAntiga) {
+			qtdJaVendida =+  venda2.getQuantidade();
+		} 
+		
+		if (qtdJaVendida >= 4) {
+			attr.addFlashAttribute("mensagemErro", "Limite de ingresso excedido que disponivel");
+			return "redirect:/vendas/";
+		}
+	
+		
+		
+		// processo apos as validacoes
+		
+		
+		
+		
+		if (valor == null) {
+			service.save(venda);
+			espetaculoService.update(esp);
+			attr.addFlashAttribute("mensagemSucesso", "Venda efetuada com sucesso");	
+		} else {
+			service.update(venda);
+			espetaculoService.update(esp);
+			attr.addFlashAttribute("mensagemSucesso", "Venda efetuada com sucesso");
+		}
+		
+		
+		return "redirect:/";
 	}
 	
 	

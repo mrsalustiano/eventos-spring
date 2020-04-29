@@ -42,7 +42,7 @@
 
 
 <title>Eventos - Qintess</title>
-
+<spring:url value="/vendas/comprar" var="comprar"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -143,9 +143,16 @@ h6 {
 
 						</div>
 						<div class="card-footer">
-							<small class="text-muted"><button
-									class="btn btn-primary btn-sm">Comprar</button></small> <small
-								class="text-muted">
+								<c:if test="${espetaculo.capacidade == 0 }">
+									<small class="text-muted"><a href="#"
+									class="btn btn-warning btn-sm">Esgotado</a>
+								</c:if>
+			
+								<c:if test="${espetaculo.capacidade > 0 }">
+			
+							<small class="text-muted"><a href="${comprar}/${espetaculo.id}"
+									class="btn btn-primary btn-sm">Comprar</a>
+								</c:if>
 								
 								<button class="btn btn-success btn-sm modal-btn " data-toggle="modal" data-some-id="${espetaculo.descricao}" data-nome="descricao"
 									data-target="#exampleModalCenter">Detalhes</button>
@@ -204,6 +211,9 @@ h6 {
           $(".modal-body p").text(data_var);
         })
        });
-</script>
+
+
+    </script>
+
 </body>
 </html>

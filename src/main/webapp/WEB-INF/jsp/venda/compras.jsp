@@ -56,19 +56,9 @@
 
 	<div class="container mt-5 ">
 		<br>
-		<div class="col-lg-9">
-			<c:if test="${not empty erro }">
-				<div id="divMensagemErro" class="alert alert-danger" role="alert">
-					${erro }</div>
-			</c:if>
+		<div class="col-lg-9"></div>
 
-			<c:if test="${not empty sucesso }">
-				<div id="divMensagemSucesso" class="alert alert-success"
-					role="alert">${sucesso }</div>
-			</c:if>
-		</div>
-
-		<div class="container mb-5">
+		<div class="container mb-5  col-8">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 
@@ -79,14 +69,23 @@
 
 					<form:form action="${salva}" cssClass="needs-validation"
 						modelAttribute="venda">
-					<input type="hidden" id="id" value="" />
-					<input type="hidden" id="cliente" value=""/>
-					<input type="hidden" id="espetaculo" value=""/>
-					<input type="hidden" id="quantidade" value=""/>
-					<input type="hidden" id="valor" value=""/>
-					
-					
-					<!--   Cliente -->
+						<form:hidden path="id" />
+
+
+						<div class="col-12">
+							<c:if test="${not empty mensagemErro }">
+								<div id="divMensagemErro" class="alert alert-danger"
+									role="alert">${mensagemErro}</div>
+							</c:if>
+
+							<c:if test="${not empty mensagemSucesso }">
+								<div id="divMensagemSucesso" class="alert alert-success"
+									role="alert">${mensagemSucesso}</div>
+							</c:if>
+						</div>
+
+
+						<!--   Cliente -->
 						<div class="form-group">
 							<label for="cliente">Cliente</label> <select id="cliente"
 								class="form-control" name="cliente">
@@ -102,17 +101,20 @@
 									</c:choose>
 								</c:forEach>
 							</select>
+						
 						</div>
 						<!--   Compras -->
-					
-					<!--   Espetaculo -->
+
+						<!--   Espetaculo -->
+
 						<div class="form-group">
-							<label for="espetaculo">Espetaculo</label> <select id="espetaculo"
-								class="form-control" name="espetaculo">
+							<label for="espetaculo">Espetaculo</label> <select
+								id="espetaculo" class="form-control " name="espetaculo">
 								<option value="">Selecione</option>
 								<c:forEach var="espetaculos" items="${espetaculos}">
 									<c:choose>
-										<c:when test="${compra.id ne null }">
+										<c:when test="${cliente.id ne null}">
+											<c:if test="${espetaculo.id == idEspetaculo }">teste</c:if>
 											<option selected value="${espetaculos.id}">${espetaculos.nome}</option>
 										</c:when>
 										<c:otherwise>
@@ -121,23 +123,26 @@
 									</c:choose>
 								</c:forEach>
 							</select>
+							
 						</div>
 						<!--   Compras -->
-					
+
 						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputQuantidade">Quantidade</label> <form:input type="number"  max="4"
-									class="form-control" id="inputquantidade" path="quantidade"/>
+							<div class="form-group col-md-12">
+								<label for="inputQuantidade">Quantidade</label>
+								<form:input type="text" cssClass="form-control " 
+									id="inputquantidade" path="quantidade" />
+							
 							</div>
-							<div class="form-group col-md-6">
-								<label for="inputValor">Valor</label> <form:input type="text"
-									class="form-control" id="valor"	path="valor" />
-							</div>
+
 						</div>
-						
-						
-						
+
+
+
 						<button type="submit" class="btn btn-primary">Confirmar</button>
+						<button class="btn btn-success" type="button"
+							onclick="javascript:history.back()">Voltar</button>
+
 					</form:form>
 
 				</div>
@@ -147,5 +152,8 @@
 
 
 	<jsp:include page="${request.contextPath}/footerPrincipal"></jsp:include>
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

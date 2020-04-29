@@ -22,4 +22,8 @@ public interface VendaDao {
     
     Venda findByCliente(Cliente cliente);
     
+    List<Venda> findByClienteEspetaculo(Cliente cliente, Espetaculo espetaculo);
+    
+
+    
 }

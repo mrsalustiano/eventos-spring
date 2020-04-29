@@ -61,6 +61,12 @@ public class VendaServiceImpl implements VendaService {
 		return null;
 	}
 
+	@Override
+	public List<Venda> findByClienteEspetaculo(Cliente cliente, Espetaculo espetaculo) {
+	
+		return dao.findByClienteEspetaculo(cliente, espetaculo);
+	}
+
 
 
 

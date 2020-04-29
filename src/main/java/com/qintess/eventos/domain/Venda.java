@@ -3,6 +3,7 @@ package com.qintess.eventos.domain;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -10,11 +11,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Venda extends AbstractEntity<Long>{
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cliente_id")
 	Cliente Cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "espetaculo_id")
 	Espetaculo espetaculo;
 	

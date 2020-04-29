@@ -83,6 +83,7 @@
 						<th scope="col">Data</th>
 						<th scope="col">Valor</th>
 						<th scope="col">Faixa Etaria</th>
+						<th scope="col">Quantidade Ingressos Disp.</th>
 						<th scope="col">Casa de Show</th>
 						<th scope="col">Foto</th>
 						<th scope="col" colspan="2">Ações</th>
@@ -98,6 +99,7 @@
 							<td>${espetaculo.dataEspetaculo}</td>
 							<td>${espetaculo.valor}</td>
 							<td>${espetaculo.faixaEtaria}</td>
+							<td>${espetaculo.capacidade}</td>
 							<td>${espetaculo.casa.nome}</td>
 							<td><c:if test="${espetaculo.imagemCasa  != null }">
 										<input type="checkbox" checked="checked" disabled="disabled">
@@ -115,11 +117,9 @@
 					</c:forEach>
 
 
-
-				
 				</tbody>
 			</table>
-
+				<button class="btn btn-success" type="button" onclick="javascript:history.back()">Voltar</button>
 		</div>
 	</div>
 

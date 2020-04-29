@@ -113,7 +113,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-
+				<button class="btn btn-success" type="button" onclick="javascript:history.back()">Voltar</button>
 		</div>
 	</div>
 

@@ -36,6 +36,9 @@ public class Espetaculo extends AbstractEntity<Long> {
 	private int capacidade;
 
 	private int destaque;
+	
+
+	
 
 	@Lob
 	@Column(columnDefinition="mediumblob")
@@ -152,5 +155,6 @@ public class Espetaculo extends AbstractEntity<Long> {
 	public void setImagemEncoded(String imagemEncoded) {
 		this.imagemEncoded = imagemEncoded;
 	}
+
 
 }
