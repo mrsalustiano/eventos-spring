@@ -42,7 +42,7 @@
 
 
 <title>Eventos - Qintess</title>
-<spring:url value="/vendas/comprar" var="comprar"></spring:url>
+<spring:url value="/vendas/" var="comprar"></spring:url>
 
 <link
 	href='<spring:url value="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />'
@@ -151,7 +151,7 @@ h6 {
 			
 								<c:if test="${espetaculo.capacidade > 0 }">
 			
-									<small class="text-muted"><a href="${comprar}/${espetaculo.id}"
+									<small class="text-muted"><a href="${comprar}"
 									class="btn btn-primary btn-sm">Comprar</a>
 									</small>
 								</c:if>

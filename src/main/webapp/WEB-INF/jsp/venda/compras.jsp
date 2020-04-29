@@ -67,7 +67,7 @@
 							Vendas </span>
 					</div>
 
-					<form:form action="${salva}" cssClass="needs-validation"
+					<form:form action="${salva}"  method="POST" cssClass="needs-validation"
 						modelAttribute="venda">
 						<form:hidden path="id" />
 

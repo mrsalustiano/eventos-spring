@@ -28,141 +28,121 @@ import com.qintess.eventos.service.VendaService;
 @Controller
 @RequestMapping("/vendas")
 public class VendasController {
-	
+
 	@Autowired
 	private VendaService service;
 
 	@Autowired
 	private EspetaculoService espetaculoService;
-	
+
 	@Autowired
 	private ClienteService clienteService;
-	
-	
-	
+
 	@GetMapping("/")
 	public String homeVenda(Venda venda, ModelMap model) {
 		return "venda/compras";
 	}
-	
-	
-	
-	@GetMapping("/comprar/{id}")
-	public String comprar(@PathVariable("id") Long id, Venda venda, ModelMap model, RedirectAttributes attr) {
-		
-	
 
-			model.addAttribute("vendas", service.findAll());
-			
-			return "venda/compras";
+	@GetMapping("/comprar/")
+	public String comprar(Venda venda, ModelMap model, RedirectAttributes attr) {
 
-			
-	
-		
-		
+		model.addAttribute("vendas", service.findAll());
+
+		return "venda/compras";
+
 	}
-	
-	
+
 	@GetMapping("/listar")
-	public String listar(Venda venda, ModelMap model	,BindingResult result) {
+	public String listar(Venda venda, ModelMap model, BindingResult result) {
 		model.addAttribute("venda", service.findAll());
-		
+
 		return "admin/venda/listar";
 	}
-	
 
 	@Transactional
 	@RequestMapping("/salva")
-	public String salvar(@ModelAttribute Venda venda, RedirectAttributes attr ) {
-		Long valor = venda.getId();
-		
-	
-		Long idEspetaculo = 0L;
+	public String salvar(@ModelAttribute Venda venda, RedirectAttributes attr) {
+
+		Long idEspetaculo = venda.getEspetaculo().getId().longValue();
+		Espetaculo esp = espetaculoService.findById(idEspetaculo);
+
 		int qtd = 0;
 		BigDecimal valores;
 		BigDecimal total;
 		int qtdJaVendida = 0;
-		
-	
-		idEspetaculo = venda.getEspetaculo().getId().longValue();
+
+		// pega a lista das compras dos ingressos do show e compara para nao passar de 4
+		// ingressos
+
+		List<Venda> vendaAntiga = service.findByClienteEspetaculo(venda.getCliente(), venda.getEspetaculo());
+
+		for (Venda venda2 : vendaAntiga) {
+			qtdJaVendida = qtdJaVendida + venda2.getQuantidade();
+		}
+
+		if (qtdJaVendida > 3 ) {
+			attr.addFlashAttribute("mensagemErro", "Limite de ingresso excedido que disponivel");
+			return "redirect:/vendas/";
+		}
+
 		qtd = venda.getQuantidade();
 		valores = venda.getEspetaculo().getValor();
-		total =  valores.multiply(new BigDecimal(qtd));
+		total = valores.multiply(new BigDecimal(qtd));
+		qtd += qtdJaVendida;
 		
 		if (qtd > 4) {
 			attr.addFlashAttribute("mensagemErro", "Limite de ingresso excedido somente 4 por evento");
 			return "redirect:/vendas/";
 		}
-		
-		
+
 		// Verifica se o total nao vai ficar negativo
 		venda.setValor(total);
-		Espetaculo esp = espetaculoService.findById(idEspetaculo);
-		int capacidade  = esp.getCapacidade();
+
+		int capacidade = esp.getCapacidade();
 		capacidade = (esp.getCapacidade() - qtd);
-		if (capacidade < 0 ) {
+		if (capacidade < 0) {
 			attr.addFlashAttribute("mensagemErro", "Quantidade de ingresso maior que disponivel");
 			return "redirect:/vendas/";
 
 		} else {
 			esp.setCapacidade(capacidade);
-				
+
 		}
-		
-		// pega a lista das compras dos ingressos do show e compara para nao passar de 4 ingressos
-		
-		List<Venda> vendaAntiga =  service.findByClienteEspetaculo(venda.getCliente(), venda.getEspetaculo());
-			
-		
-		for (Venda venda2 : vendaAntiga) {
-			qtdJaVendida =+  venda2.getQuantidade();
-		} 
-		
-		if (qtdJaVendida >= 4) {
-			attr.addFlashAttribute("mensagemErro", "Limite de ingresso excedido que disponivel");
-			return "redirect:/vendas/";
-		}
-	
-		
-		
+
 		// processo apos as validacoes
-		
-		
-		
-		
+
+		Long valor = venda.getId();
 		if (valor == null) {
+
 			service.save(venda);
 			espetaculoService.update(esp);
-			attr.addFlashAttribute("mensagemSucesso", "Venda efetuada com sucesso");	
+			attr.addFlashAttribute("mensagemSucesso", "Venda efetuada com sucesso");
 		} else {
 			service.update(venda);
 			espetaculoService.update(esp);
 			attr.addFlashAttribute("mensagemSucesso", "Venda efetuada com sucesso");
 		}
-		
-		
+
 		return "redirect:/";
 	}
-	
-	
+
 	@PostMapping("/editar")
 	public String editar(@Valid Venda venda, BindingResult result) {
 		service.update(venda);
-		
+
 		return "redirect:/vendas/comprar";
 	}
-	
-	
+
 	@GetMapping("/deleta/{id}")
 	@Transactional
 	public String deleta(@PathVariable(name = "id") Long id, RedirectAttributes attr) {
-	
+
 		service.delete(id);
 		attr.addFlashAttribute("mensagemSucesso", "Venda cancelada com sucesso");
 		return "redirect:/vendas/comprar";
-		
+
 	}
-	
+
 	@GetMapping("/altera/{id}")
 	public String carregaAlterar(@PathVariable(name = "id") Long id, Model model, RedirectAttributes attr) {
 		try {
@@ -176,19 +156,16 @@ public class VendasController {
 
 		}
 		return "venda/compras";
-	
+
 	}
-	
-	
+
 	@ModelAttribute("espetaculos")
 	public List<Espetaculo> listaEspetaculos() {
 		return espetaculoService.findAll();
-	}	
-	
-	
-	
+	}
+
 	@ModelAttribute("clientes")
 	public List<Cliente> listaClientes() {
 		return clienteService.findAll();
-	}	
+	}
 }
