@@ -1,0 +1,15 @@
+spring.datasource.url=postgres://jrhtyidfbgcyry:164de2750f5c69676ba297150e900a32910536f0e0364d9fac23e3f7b6aa0d4c@ec2-34-225-82-212.compute-1.amazonaws.com:5432/dd8usk6ljvt2b2
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+
+
+#JPA
+spring.jpa.hibernate.ddl-auto= update
+spring.jpa.show-sql= true
+spring.jpa.open-in-view= true
+
+
+spring.mvc.view.prefix: /WEB-INF/jsp/
+spring.mvc.view.suffix: .jsp
+spring.servlet.multipart.max-file-size=-1
+spring.servlet.multipart.max-request-size=-1
